@@ -1,6 +1,19 @@
+local composer = require("composer")
+
+local scene = composer.newScene()
+
+
+
+
+
+function scene:create( event )
+	local sceneGroup = self.view
+
+
 
 -------require-----------------
 local widget = require ("widget")
+
 
 
 ----------newRect-------------
@@ -46,8 +59,8 @@ local cadastro = widget.newButton( {
 local logar = widget.newButton( {
 	x = display.contentWidth /5.2,
 	y = display.contentHeight /1.63,
-	label = "Login",	
-	id = "login",
+	label = "Entrar",	
+	id = "logar",
 	fontSize =18,
 	width = 100, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
@@ -57,3 +70,10 @@ local logar = widget.newButton( {
     strokeWidth = 1
     --onEvent = evento 
 	}  )
+
+	--sceneGroup:insert(logar)
+	
+end
+scene:addEventListener("create", scene)
+return scene
+
