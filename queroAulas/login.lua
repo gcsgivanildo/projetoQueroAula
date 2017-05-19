@@ -1,15 +1,28 @@
+
+-------------banco de dados------------------
+local sqlite3 = require("sqlite3")
+local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
+local db = sqlite3.open( path )
+
+local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY, usuario, senha);]]
+print( tableLogin )
+db:exec( tableLogin )
+
+local usuariot = "givanildo"
+local senhat = "cordeiro"
+
+local insertLogin = [[INSERT INTO login VALUES (NULL, ']]..usuariot..[[',']]..senhat..[['); ]]
+db:exec(insertLogin)
+
+-----------composer------------------
 local composer = require("composer")
 
 local scene = composer.newScene()
 
 
 
-
-
 function scene:create( event )
 	local sceneGroup = self.view
-
-
 
 -------require-----------------
 local widget = require ("widget")
@@ -40,7 +53,23 @@ visitanteTxt:setFillColor( 1, 1, 1, .7 )
 
 -------newTextField-----------
 local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY/1.5, display.contentWidth -50, display.contentHeight/15 )
-local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
+local senhaTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
+
+--------funcoes-------------
+function entrarLogin( event )
+	if(event.phase == "ended") then
+		--visitanteTxt.text = "Usuario: " ..usuarioTf.text.." Senha: "..senhaTf.text
+		for row in db:nrows("SELECT * FROM login") do
+			if(row.usuario == usuarioTf.text and row.senha == senhaTf.text) then
+			    local texto = "Usuario: "..row.usuario.."".." - senha: "..row.senha
+			    visitanteTxt.text= texto
+			else 
+				visitanteTxt.text = "Usuario ou Senha incorreto(os)"
+		    end
+		end
+
+	end
+end
 
 -------newButton-----------
 local cadastro = widget.newButton( {
@@ -67,8 +96,8 @@ local logar = widget.newButton( {
 	shape = "roundedrect", 
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
 	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
-    strokeWidth = 1
-    --onEvent = evento 
+    strokeWidth = 1,
+    onEvent = entrarLogin 
 	}  )
 
 	--sceneGroup:insert(logar)
