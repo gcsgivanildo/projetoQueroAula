@@ -5,7 +5,7 @@ local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
 local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY, usuario, senha);]]
-print( tableLogin )
+--print( tableLogin )
 db:exec( tableLogin )
 
 local usuariot = "givanildo"

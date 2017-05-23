@@ -1,4 +1,3 @@
-
 local widget = require ("widget")
 
 
@@ -10,7 +9,7 @@ ret = display.newRect(display.contentCenterX, 84, display.contentWidth * 2, disp
 ret:setFillColor( 1, 1, 1 )
 linha = display.newRect(display.contentCenterX*1.25, 25, display.contentWidth * .008, display.contentHeight * 0.1)
 linha:setFillColor( 1, 1, 1, .7 )
-local logo = display.newImageRect( "icones/chapeu.png", 80, 80 )
+local logo = display.newImageRect( "icones/chapeu.png", 70, 80 )
 logo.x = display.contentCenterX / 3.5
 logo.y = display.contentCenterY / 10
 
@@ -22,7 +21,7 @@ homeTxt:setFillColor( 0, 0, 255 )
 local function chamarlogin( event )
 	if (event.phase == "ended") then
 	local composer = require("composer")
-composer.gotoScene( "login" )
+	composer.gotoScene( "login" )
 end
 end
 
