@@ -1,6 +1,57 @@
 
-local widget = require ("widget")
+-----------composer------------------
+local composer = require("composer")
 
+local scene = composer.newScene()
+
+composer.removeScene( "cadastroProfessor" )
+composer.removeScene( "login" )
+composer.removeScene( "home" )
+
+
+
+-- create()
+function scene:create( event )
+ 
+    local sceneGroup = self.view
+    -- Code here runs when the scene is first created but has not yet appeared on screen
+ 
+end
+ 
+ 
+-- show()
+function scene:show( event )
+ 
+    local sceneGroup = self.view
+    local phase = event.phase
+ 
+    if ( phase == "will" ) then
+        -- Code here runs when the scene is still off screen (but is about to come on screen)
+ 
+    elseif ( phase == "did" ) then
+        -- Code here runs when the scene is entirely on screen
+ 
+    end
+end
+ 
+ 
+-- hide()
+function scene:hide( event )
+ 
+    local sceneGroup = self.view
+    local phase = event.phase
+ 
+    if ( phase == "will" ) then
+        -- Code here runs when the scene is on screen (but is about to go off screen)
+ 
+    elseif ( phase == "did" ) then
+        -- Code here runs immediately after the scene goes entirely off screen
+ 
+    end
+end
+ 
+
+local widget = require ("widget")
 
 
 ----------newRect-------------
@@ -16,25 +67,55 @@ logo.y = display.contentCenterY / 10
 
 --------newText------------
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 ) 
-local homeTxt = display.newText("Home", display.contentCenterX/3, display.contentCenterY /2.9, native.systemFont, 18 )
-homeTxt:setFillColor( 0, 0, 255 )
+local bemVindotxt = display.newText("    Seja\nBem Vindo", display.contentCenterX * 1.6, display.contentCenterY/9, native.systemFont, 18 ) 
 
-local function chamarlogin( event )
+
+
+
+-----------funcao--------
+local function chamarHome( event )
 	if (event.phase == "ended") then
-	local composer = require("composer")
-composer.gotoScene( "login" )
-end
+		local composer = require("composer")
+		composer.gotoScene( "home" )
+	end
 end
 
-local cadastro = widget.newButton( {
-	x = display.contentWidth  /1.25,
-	y = display.contentHeight/18,
-	label = "Faze Login",	
+--------------botao----------------
+local home = widget.newButton( {
+	x = display.contentWidth /2,
+	y = display.contentHeight/5.7,
+	label = "Clique aqui para ter acesso ao site",	
 	id = "entrar",
 	fontSize =18,
-	width = 100, height = 30,
+	width = 300, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect", 
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamarlogin 
+	onEvent = chamarHome 
 	}  )
+
+
+-- destroy()
+function scene:destroy( event )
+        local group = self.view
+ 		group:insert(home)
+ 		group:insert(meuGroup)
+
+    end
+ 
+-- -----------------------------------------------------------------------------------
+-- Scene event function listeners
+-- -----------------------------------------------------------------------------------
+scene:addEventListener( "create", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
+-- -----------------------------------------------------------------------------------
+ 
+return scene
+
+--]]
+
+
+
+
