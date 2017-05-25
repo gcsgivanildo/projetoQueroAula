@@ -5,8 +5,9 @@ local composer = require("composer")
 local scene = composer.newScene()
 
 composer.removeScene( "cadastroProfessor" )
-composer.removeScene( "login" )
-composer.removeScene( "home" )
+composer.removeScene( "login")
+composer.removeScene( "home")
+composer.removeScene( "pesquisarProfessor")
 
 
 
@@ -70,7 +71,13 @@ local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, displ
 local bemVindotxt = display.newText("    Seja\nBem Vindo", display.contentCenterX * 1.6, display.contentCenterY/9, native.systemFont, 18 ) 
 
 
-
+local meuGroup = display.newGroup()
+	meuGroup:insert( retLogo )
+	meuGroup:insert( ret )
+	meuGroup:insert( linha )
+	meuGroup:insert( logo )
+	meuGroup:insert( logotxt )
+	meuGroup:insert( bemVindotxt) 
 
 -----------funcao--------
 local function chamarHome( event )

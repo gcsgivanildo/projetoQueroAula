@@ -53,7 +53,7 @@ local sqlite3 = require("sqlite3")
 local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
-local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY, usuario, senha);]]
+local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY autoincrement, usuario, senha);]]
 print( tableLogin )
 db:exec( tableLogin )
 

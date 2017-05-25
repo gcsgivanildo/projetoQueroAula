@@ -3,9 +3,9 @@
 local composer = require("composer")
 
 local scene = composer.newScene()
-composer.removeScene( "login" )
+composer.removeScene( "login")
 composer.removeScene( "cadastrarProfessor" )
-composer.removeScene( "main" )
+composer.removeScene( "main")
 composer.removeScene( "pesquisarProfessor" )
 
 -- create()
