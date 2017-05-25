@@ -54,7 +54,8 @@ local sqlite3 = require("sqlite3")
 local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
-local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY, nome, usuario, senha, nivel-ensino, formacao);]]
+local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY autoincrement, nome, usuario, senha, nivelEnsino, formacao);]]
+print( tableProfessor )
 db:exec( tableProfessor )
 
 
@@ -107,19 +108,13 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( localizacaoTxt )
 
 
-
-local nome = nomeTf.text
-local usuario = usuarioTf.text
-local senha = senhaTf.text
-local nivelEnsino = nivelEnsinoTf.text
-local formacao = formacaoTf.text
-
 ---------------funções-----------------
 function ConcluirCadastroProfessor( event )
 	if(event.phase == "ended") then
 		
-		local insertProfessor = [[INSERT INTO professor VALUES (NULL, ']]..nome..[[',']]..usuario..[[',']]..senha..[[',']]..nivelEnsino..[[',']]..formacao..[['); ]]
-		db:exec(insertProfessor)		
+		local insertProfessor = [[INSERT INTO professor VALUES (NULL, ']]..nomeTf.text..[[',']]..usuarioTf.text..[[',']]..senhaTf.text..[[',']]..nivelEnsinoTf.text..[[',']]..formacaoTf.text..[['); ]]
+		print( insertProfessor )
+		db:exec(insertProfessor)			
 	end
 end
 
@@ -158,7 +153,7 @@ local cadastrar = widget.newButton( {
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
 	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
     strokeWidth = 1,
-    onEvent = ConcluirCadastroProfessor 
+    onEvent = ConcluirCadastroProfessor	
 	}  )
 
 

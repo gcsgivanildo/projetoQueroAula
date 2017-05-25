@@ -54,9 +54,6 @@ local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
 
-
-
-
 -------require-----------------
 local widget = require ("widget")
 
@@ -84,10 +81,6 @@ localizacaoTxt:setFillColor( 0, 0, 255 )
 --local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /1.16, native.systemFont, 18 )
 --senhaTxt:setFillColor( 1, 1, 1 )
 
-local informacaoTxt = display.newText("Campo para testar retorno de pesquisa", display.contentCenterX, display.contentCenterY*1.4, native.systemFont, 18 )
-informacaoTxt:setFillColor( 1, 1, 1, .7 )
-
-
 
 local meuGroup = display.newGroup()
 	meuGroup:insert( retLogo )
@@ -96,7 +89,6 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( logo )
 	meuGroup:insert( logotxt )
 	meuGroup:insert( localizacaoTxt )
-	meuGroup:insert( informacaoTxt )
 
 -------newTextField-----------
 --local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY/1.5, display.contentWidth -50, display.contentHeight/15 )
@@ -105,27 +97,68 @@ local meuGroup = display.newGroup()
 --------funcoes-------------
 function pesquisarProfessorNome( event )
 	if(event.phase == "ended") then
-		--visitanteTxt.text = "Usuario: " ..usuarioTf.text.." Senha: "..senhaTf.text
-		for row in db:nrows("SELECT * FROM professor") do
-			--[[if(row.nome == usuarioTf.text and row.senha == senhaTf.text) then
-			    local texto = "Usuario: "..row.usuario.."".." - senha: "..row.senha
-			    visitanteTxt.text= texto
-			else 
-				visitanteTxt.text = "Usuario ou Senha incorreto(os)"
-		    end --]]
-		    informacaoTxt = row.nome.."\n"
+		local function onRowRender(event)
+	
+		local row = event.row
+
+		local font = native.systemFont
+		local fontSize = 12
+		local rowHeight = row.height/2
+
+		----display.newText options-----
+
+	local rowHeight = row.contentHeight
+	    local rowWidth = row.contentWidth
+	 
+	    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
+	    rowTitle:setFillColor( 0 )
+	 
+	    -- Align the label left and vertically centered
+	    rowTitle.anchorX = 0
+	    rowTitle.x = 20
+	    rowTitle.y = rowHeight * 0.5
+	end
+
+	local tableView = widget.newTableView({
+		
+		left = 10,
+	    top = 160,
+	    height = 350,
+	    width = 300,
+		onRowRender = onRowRender,
+		onRowTouch = onRowTouch,
+		listener = scrollListener,
+	})
+
+
+	--for row in db:nrows("SELECT * FROM professor") do
+	for row in db:nrows("SELECT * FROM professor") do
+		 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
+			
+		--local rowParams = {
+		--	listaProf,	
+		--}
+
+		tableView:insertRow({
+			rowHeight = 120,
+		--	params = rowParams,
+		})
+	end	
+
+
+	end
+end
+
+
+	local function chamartelaHome( event )
+		if (event.phase == "ended") then	
+
+		composer.gotoScene( "home" )
 		end
-
 	end
-end
 
-local function chamartelaHome( event )
-	if (event.phase == "ended") then	
 
-	composer.gotoScene( "home" )
-	end
-end
-
+	-----------------------------
 
 -------newButton-----------
 local inicio = widget.newButton( {
@@ -153,7 +186,7 @@ local pesquisarProfessorNome = widget.newButton( {
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
 	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
     strokeWidth = 1,
-    onEvent = pesquisarProfessorNome 
+    onEvent = pesquisarProfessorNome
 	}  )
 
 	
@@ -161,11 +194,11 @@ local pesquisarProfessorNome = widget.newButton( {
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(logar)
- 		group:insert(usuarioTf)
- 		group:insert(senhaTf)
- 		group:insert(senhaTxt)
- 		group:insert(usuarioTxt)
+ 		group:insert(pesquisarProfessorNome)
+ 		group:insert(inicio)
+ 		--group:insert(senhaTf)
+ 		--group:insert(senhaTxt)
+ 		--group:insert(usuarioTxt)
  		group:insert(meuGroup)
 
     end
