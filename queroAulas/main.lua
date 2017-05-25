@@ -1,7 +1,5 @@
 local widget = require ("widget")
 
-
-
 ----------newRect-------------
 retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
 retLogo:setFillColor( 0, 0, 250 )

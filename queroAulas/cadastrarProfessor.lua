@@ -1,8 +1,11 @@
+
+
 -----------composer------------------
-local composer = require( "composer" )
- 
+local composer = require("composer")
+
 local scene = composer.newScene()
 composer.removeScene( "home" )
+
 
 
 -- create()
@@ -46,22 +49,13 @@ function scene:hide( event )
 end
  
 
-
-
 -------------banco de dados------------------
 local sqlite3 = require("sqlite3")
 local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
-local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY, usuario, senha);]]
---print( tableLogin )
-db:exec( tableLogin )
-
-local usuariot = "givanildo"
-local senhat = "cordeiro"
-
-local insertLogin = [[INSERT INTO login VALUES (NULL, ']]..usuariot..[[',']]..senhat..[['); ]]
-db:exec(insertLogin)
+local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY, nome, usuario, senha, nivel-ensino, formacao);]]
+db:exec( tableProfessor )
 
 
 
@@ -83,16 +77,26 @@ logo.y = display.contentCenterY / 10
 
 --------newText------------
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 ) 
-local localizacaoTxt = display.newText("Fazer Login", display.contentCenterX/3, display.contentCenterY /2.9, native.systemFont, 18 )
+local localizacaoTxt = display.newText("Cadastro de Professor", display.contentCenterX/1.6, display.contentCenterY /2.9, native.systemFont, 18 )
 localizacaoTxt:setFillColor( 0, 0, 255 )
-local usuarioTxt = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.9, native.systemFont, 18 )
+
+
+local nomeTxt = display.newText("Nome", display.contentCenterX/1.2, display.contentCenterY /1.9, native.systemFont, 18 )
+--nomeTxt:setFillColor( 1, 1, 1 )
+
+local usuarioTxt = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
 usuarioTxt:setFillColor( 1, 1, 1 )
-local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /1.16, native.systemFont, 18 )
---senhaTxt:setFillColor( 1, 1, 1 )
-local visitanteTxt = display.newText("Acessar como visitante", display.contentCenterX, display.contentCenterY*2, native.systemFont, 18 )
-visitanteTxt:setFillColor( 1, 1, 1, .7 )
+local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /0.85, native.systemFont, 18 )
+local nivelEnsinoTxt = display.newText("Nível de Ensino", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
+local formacaoTxt = display.newText("Formação", display.contentCenterX/3.1, display.contentCenterY * 1.8, native.systemFont, 18 )
 
 
+-------newTextField-----------
+local nomeTf = native.newTextField( display.contentCenterX*1.3 , display.contentCenterY/1.5, display.contentWidth -100, display.contentHeight/15 )
+local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
+local senhaTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY *1.3, display.contentWidth -50, display.contentHeight/15 )
+local nivelEnsinoTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.64, display.contentWidth -50, display.contentHeight/15 )
+local formacaoTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.95, display.contentWidth -50, display.contentHeight/15 )
 
 local meuGroup = display.newGroup()
 	meuGroup:insert( retLogo )
@@ -101,27 +105,24 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( logo )
 	meuGroup:insert( logotxt )
 	meuGroup:insert( localizacaoTxt )
-	meuGroup:insert( visitanteTxt )
 
--------newTextField-----------
-local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY/1.5, display.contentWidth -50, display.contentHeight/15 )
-local senhaTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
 
---------funcoes-------------
-function entrarLogin( event )
+
+local nome = nomeTf.text
+local usuario = usuarioTf.text
+local senha = senhaTf.text
+local nivelEnsino = nivelEnsinoTf.text
+local formacao = formacaoTf.text
+
+---------------funções-----------------
+function ConcluirCadastroProfessor( event )
 	if(event.phase == "ended") then
-		--visitanteTxt.text = "Usuario: " ..usuarioTf.text.." Senha: "..senhaTf.text
-		for row in db:nrows("SELECT * FROM login") do
-			if(row.usuario == usuarioTf.text and row.senha == senhaTf.text) then
-			    local texto = "Usuario: "..row.usuario.."".." - senha: "..row.senha
-			    visitanteTxt.text= texto
-			else 
-				visitanteTxt.text = "Usuario ou Senha incorreto(os)"
-		    end
-		end
-
+		
+		local insertProfessor = [[INSERT INTO professor VALUES (NULL, ']]..nome..[[',']]..usuario..[[',']]..senha..[[',']]..nivelEnsino..[[',']]..formacao..[['); ]]
+		db:exec(insertProfessor)		
 	end
 end
+
 
 local function chamartelaHome( event )
 	if (event.phase == "ended") then	
@@ -142,14 +143,14 @@ local inicio = widget.newButton( {
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect", 
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},	
-    onEvent = chamartelaHome 
+    onEvent = chamartelaHome
 	} )
 
-local logar = widget.newButton( {
+local cadastrar = widget.newButton( {
 	x = display.contentWidth /5.2,
-	y = display.contentHeight /1.63,
-	label = "Entrar",	
-	id = "logar",
+	y = display.contentHeight *1.05,
+	label = "cadastar",	
+	id = "cadastrar",
 	fontSize =18,
 	width = 100, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
@@ -157,19 +158,32 @@ local logar = widget.newButton( {
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
 	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
     strokeWidth = 1,
-    onEvent = entrarLogin 
+    onEvent = ConcluirCadastroProfessor 
 	}  )
 
-	
-	
+
+
+--local visitanteTxt = display.newText("Acessar como visitante", display.contentCenterX, display.contentCenterY*2.1, native.systemFont, 18 )
+--visitanteTxt:setFillColor( 1, 1, 1, .7 )
+
+
+
+
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(logar)
- 		group:insert(usuarioTf)
- 		group:insert(senhaTf)
- 		group:insert(senhaTxt)
+ 		group:insert(nomeTxt)
+ 		group:insert(nomeTf)
  		group:insert(usuarioTxt)
+ 		group:insert(usuarioTf)
+ 		group:insert(senhaTxt)
+ 		group:insert(senhaTf)
+ 		group:insert(nivelEnsinoTxt)
+ 		group:insert(nivelEnsinoTf)
+ 		group:insert(formacaoTxt)
+ 		group:insert(formacaoTf)
+ 		group:insert(cadastrar)
+ 		group:insert(inicio)
  		group:insert(meuGroup)
 
     end
@@ -184,3 +198,6 @@ scene:addEventListener( "destroy", scene )
 -- -----------------------------------------------------------------------------------
  
 return scene
+
+
+
