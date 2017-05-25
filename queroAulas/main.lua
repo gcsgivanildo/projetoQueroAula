@@ -50,7 +50,9 @@ function scene:hide( event )
     end
 end
  
+
 local widget = require ("widget")
+
 
 ----------newRect-------------
 retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
@@ -59,16 +61,14 @@ ret = display.newRect(display.contentCenterX, 84, display.contentWidth * 2, disp
 ret:setFillColor( 1, 1, 1 )
 linha = display.newRect(display.contentCenterX*1.25, 25, display.contentWidth * .008, display.contentHeight * 0.1)
 linha:setFillColor( 1, 1, 1, .7 )
-local logo = display.newImageRect( "icones/chapeu.png", 70, 80 )
+local logo = display.newImageRect( "icones/chapeu.png", 80, 80 )
 logo.x = display.contentCenterX / 3.5
 logo.y = display.contentCenterY / 10
 
 --------newText------------
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 ) 
-local homeTxt = display.newText("Home", display.contentCenterX/3, display.contentCenterY /2.9, native.systemFont, 18 )
-homeTxt:setFillColor( 0, 0, 255 )
+local bemVindotxt = display.newText("    Seja\nBem Vindo", display.contentCenterX * 1.6, display.contentCenterY/9, native.systemFont, 18 ) 
 
-local function chamarlogin( event )
 
 local meuGroup = display.newGroup()
 	meuGroup:insert( retLogo )
@@ -80,22 +80,44 @@ local meuGroup = display.newGroup()
 
 -----------funcao--------
 local function chamarHome( event )
-
 	if (event.phase == "ended") then
-	local composer = require("composer")
-	composer.gotoScene( "login" )
-end
+		local composer = require("composer")
+		composer.gotoScene( "home" )
+	end
 end
 
-local cadastro = widget.newButton( {
-	x = display.contentWidth  /1.25,
-	y = display.contentHeight/18,
-	label = "Faze Login",	
+--------------botao----------------
+local home = widget.newButton( {
+	x = display.contentWidth /2,
+	y = display.contentHeight/5.7,
+	label = "Clique aqui para ter acesso ao site",	
 	id = "entrar",
 	fontSize =18,
-	width = 100, height = 30,
+	width = 300, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect", 
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamarlogin 
+	onEvent = chamarHome 
 	}  )
+
+
+-- destroy()
+function scene:destroy( event )
+        local group = self.view
+ 		group:insert(home)
+ 		group:insert(meuGroup)
+
+    end
+ 
+-- -----------------------------------------------------------------------------------
+-- Scene event function listeners
+-- -----------------------------------------------------------------------------------
+scene:addEventListener( "create", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
+-- -----------------------------------------------------------------------------------
+ 
+return scene
+
+--]]
