@@ -107,45 +107,43 @@ function pesquisarProfessorNome( event )
 
 		----display.newText options-----
 
-	local rowHeight = row.contentHeight
-	    local rowWidth = row.contentWidth
-	 
-	    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
-	    rowTitle:setFillColor( 0 )
-	 
-	    -- Align the label left and vertically centered
-	    rowTitle.anchorX = 0
-	    rowTitle.x = 20
-	    rowTitle.y = rowHeight * 0.5
-	end
+		local rowHeight = row.contentHeight
+		    local rowWidth = row.contentWidth
+		 
+		    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
+		    rowTitle:setFillColor( 0 )
+		 
+		    -- Align the label left and vertically centered
+		    rowTitle.anchorX = 0
+		    rowTitle.x = 20
+		    rowTitle.y = rowHeight * 0.5
+		end
 
-	local tableView = widget.newTableView({
-		
-		left = 10,
-	    top = 160,
-	    height = 350,
-	    width = 300,
-		onRowRender = onRowRender,
-		onRowTouch = onRowTouch,
-		listener = scrollListener,
-	})
-
-
-	--for row in db:nrows("SELECT * FROM professor") do
-	for row in db:nrows("SELECT * FROM professor") do
-		 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
+		 tableView = widget.newTableView({
 			
-		--local rowParams = {
-		--	listaProf,	
-		--}
-
-		tableView:insertRow({
-			rowHeight = 120,
-		--	params = rowParams,
+			left = 10,
+		    top = 160,
+		    height = 350,
+		    width = 300,
+			onRowRender = onRowRender,
+			onRowTouch = onRowTouch,
+			listener = scrollListener,
 		})
-	end	
 
 
+		--for row in db:nrows("SELECT * FROM professor") do
+		for row in db:nrows("SELECT * FROM professor") do
+			 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
+				
+			--local rowParams = {
+			--	listaProf,	
+			--}
+
+			tableView:insertRow({
+				rowHeight = 120,
+			--	params = rowParams,
+			})
+		end	
 	end
 end
 
@@ -200,6 +198,7 @@ function scene:destroy( event )
  		--group:insert(senhaTxt)
  		--group:insert(usuarioTxt)
  		group:insert(meuGroup)
+ 		group:insert(tableView)
 
     end
  
