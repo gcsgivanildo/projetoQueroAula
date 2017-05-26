@@ -51,7 +51,7 @@ end
 
 -------------banco de dados------------------
 local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
+local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
 local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY autoincrement, nome, usuario, senha, nivelEnsino, formacao);]]
