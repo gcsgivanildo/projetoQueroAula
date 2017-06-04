@@ -80,12 +80,7 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( localizacaoTxt )
 
 -----------funcao--------
-local function chamarlogin( event )
-	if (event.phase == "ended") then
-		local composer = require("composer")
-		composer.gotoScene( "login" )
-	end
-end
+
 
 local function chamarCadastrarProfessor( event )
 	if (event.phase == "ended") then
@@ -119,19 +114,6 @@ local inicio = widget.newButton( {
 	} )
 
 
-local login = widget.newButton( {
-	x = display.contentWidth /4.5,
-	y = display.contentHeight/3.6,
-	label = "Fazer login",
-	id = "login",
-	fontSize =18,
-	width = 100, height = 30,
-	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-	shape = "roundedrect",
-	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamarlogin
-	}  )
-
 local cadastrarProfessor = widget.newButton( {
 	x = display.contentWidth /3.15,
 	y = display.contentHeight/2.8,
@@ -145,18 +127,6 @@ local cadastrarProfessor = widget.newButton( {
 	onEvent = chamarCadastrarProfessor
 	}  )
 
-	local pesquisarProfessor = widget.newButton( {
-	x = display.contentWidth /3.15,
-	y = display.contentHeight/2.3,
-	label = "Pesquisar Professor",
-	id = "pesquisarProfessor",
-	fontSize =18,
-	width = 160, height = 30,
-	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-	shape = "roundedrect",
-	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamarPesquisarProfessor
-	}  )
 
 
 
