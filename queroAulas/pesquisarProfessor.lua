@@ -48,9 +48,9 @@ end
 
 
 
--------------banco de dados------------------
+-------------ARRAY DE DADOS------------------
 local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
+local path = system.pathForFile( "quero-aula1.db", system.DocumentsDirectory )
 local db = sqlite3.open( path )
 
 
@@ -133,14 +133,15 @@ function pesquisarProfessorNome( event )
 
 	--for row in db:nrows("SELECT * FROM professor") do
 	for row in db:nrows("SELECT * FROM professor") do
-		 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
-			
+		 listaProf = "Id: "..row.id.."\nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
+		p = display.newText("tste", 10, 10 )
 		--local rowParams = {
 		--	listaProf,	
 		--}
-
+		
 		tableView:insertRow({
 			rowHeight = 120,
+
 		--	params = rowParams,
 		})
 	end	
