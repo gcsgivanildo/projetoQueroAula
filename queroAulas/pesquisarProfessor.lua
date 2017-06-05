@@ -44,19 +44,7 @@ function scene:hide( event )
  
     end
 end
- 
-<<<<<<< HEAD
 
-
-
--------------banco de dados------------------
-local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aula.db", system.DocumentsDirectory )
-local db = sqlite3.open( path )
-
-
-=======
->>>>>>> d16edbe... Modificado BD para array
 -------require-----------------
 local widget = require ("widget")
 
@@ -157,29 +145,12 @@ function pesquisarProfessorNome( event )
 		listener = scrollListener,
 	})
 
-<<<<<<< HEAD
-
-	--for row in db:nrows("SELECT * FROM professor") do
-	for row in db:nrows("SELECT * FROM professor") do
-		 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
-			
-		--local rowParams = {
-		--	listaProf,	
-		--}
-
-		tableView:insertRow({
-			rowHeight = 120,
-=======
 	for i=1, #profDados do
 		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
 		
 
 		tableView:insertRow({
 			rowHeight = 200,
-
->>>>>>> d16edbe... Modificado BD para array
-		--	params = rowParams,
-		})
 	end	
 
 
