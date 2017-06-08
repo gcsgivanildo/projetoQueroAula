@@ -147,10 +147,10 @@ function pesquisarProfessorNome( event )
 
 	for i=1, #profDados do
 		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
-		
 
 		tableView:insertRow({
 			rowHeight = 200,
+		})
 	end	
 
 
