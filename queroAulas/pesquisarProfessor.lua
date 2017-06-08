@@ -46,6 +46,7 @@ function scene:hide( event )
 end
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -57,6 +58,8 @@ local db = sqlite3.open( path )
 
 =======
 >>>>>>> d16edbe... Modificado BD para array
+=======
+>>>>>>> e6ef85b07c8c5a20685fcae113af942544119ea4
 -------require-----------------
 local widget = require ("widget")
 
@@ -158,6 +161,7 @@ function pesquisarProfessorNome( event )
 	})
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	--for row in db:nrows("SELECT * FROM professor") do
 	for row in db:nrows("SELECT * FROM professor") do
@@ -178,6 +182,15 @@ function pesquisarProfessorNome( event )
 			rowHeight = 200,
 
 >>>>>>> d16edbe... Modificado BD para array
+=======
+	for i=1, #profDados do
+		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
+		
+
+		tableView:insertRow({
+			rowHeight = 200,
+
+>>>>>>> e6ef85b07c8c5a20685fcae113af942544119ea4
 		--	params = rowParams,
 		})
 	end	
