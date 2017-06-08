@@ -44,7 +44,11 @@ function scene:hide( event )
  
     end
 end
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> d16edbe... Modificado BD para array
 -------require-----------------
 local widget = require ("widget")
 
@@ -150,6 +154,10 @@ function pesquisarProfessorNome( event )
 
 		tableView:insertRow({
 			rowHeight = 200,
+
+		tableView:insertRow({
+			rowHeight = 200,
+
 		})
 	end	
 
