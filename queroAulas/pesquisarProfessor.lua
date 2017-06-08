@@ -63,7 +63,7 @@ local widget = require ("widget")
 profDados = {}
 
 profDados[1] = {}
-profDados[1].nome = "M"
+profDados[1].nome = "Mução"
 profDados[1].formacao = "Eng. Bioquimico"
 profDados[1].especialidade = "Materiais Organicos"
 profDados[1].aConhecimento = "Quimica Organica e FisicoQuimica"
@@ -72,7 +72,7 @@ profDados[1].eExperiencia = "3 anos - QuimióBio"
 profDados[1].eventos = "Sbio - Congresso Bárasil"
 
 profDados[2] = {}
-profDados[2].nome = "J"
+profDados[2].nome = "Jussé"
 profDados[2].formacao = "Computaçao"
 profDados[2].especialidade = "Desenv. Web"
 profDados[2].aConhecimento = "Programação, BD, Redes"
