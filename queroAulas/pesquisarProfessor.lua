@@ -44,11 +44,7 @@ function scene:hide( event )
  
     end
 end
-<<<<<<< HEAD
 
-=======
- 
->>>>>>> d16edbe... Modificado BD para array
 -------require-----------------
 local widget = require ("widget")
 
@@ -149,15 +145,14 @@ function pesquisarProfessorNome( event )
 		listener = scrollListener,
 	})
 
+		tableView:insertRow({
+			rowHeight = 120,
+
 	for i=1, #profDados do
 		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
 
 		tableView:insertRow({
 			rowHeight = 200,
-
-		tableView:insertRow({
-			rowHeight = 200,
-
 		})
 	end	
 
