@@ -49,7 +49,6 @@ end
 local widget = require ("widget")
 
 profDados = {}
-
 profDados[1] = {}
 profDados[1].nome = "Mução"
 profDados[1].formacao = "Eng. Bioquimico"
@@ -135,7 +134,6 @@ function pesquisarProfessorNome( event )
 	end
 
 	local tableView = widget.newTableView({
-		
 		left = 10,
 	    top = 160,
 	    height = 350,
@@ -145,9 +143,7 @@ function pesquisarProfessorNome( event )
 		listener = scrollListener,
 	})
 
-		tableView:insertRow({
-			rowHeight = 120,
-
+	
 	for i=1, #profDados do
 		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
 
