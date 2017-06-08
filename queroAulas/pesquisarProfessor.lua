@@ -134,7 +134,7 @@ function pesquisarProfessorNome( event )
 	--for row in db:nrows("SELECT * FROM professor") do
 	for row in db:nrows("SELECT * FROM professor") do
 		 listaProf = "Id: "..row.id.."\nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
-		p = display.newText("tste", 10, 10 )
+		
 		--local rowParams = {
 		--	listaProf,	
 		--}
