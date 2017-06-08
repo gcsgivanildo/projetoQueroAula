@@ -45,19 +45,28 @@ function scene:hide( event )
     end
 end
  
-
-
-
--------------ARRAY DE DADOS------------------
-local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aula1.db", system.DocumentsDirectory )
-local db = sqlite3.open( path )
-
-
 -------require-----------------
 local widget = require ("widget")
 
+profDados = {}
 
+profDados[1] = {}
+profDados[1].nome = "M"
+profDados[1].formacao = "Eng. Bioquimico"
+profDados[1].especialidade = "Materiais Organicos"
+profDados[1].aConhecimento = "Quimica Organica e FisicoQuimica"
+profDados[1].aAtuacao = "Aplicacao em solos, eng de alimentos e o escambal a quatro"
+profDados[1].eExperiencia = "3 anos - QuimióBio"
+profDados[1].eventos = "Sbio - Congresso Bárasil"
+
+profDados[2] = {}
+profDados[2].nome = "J"
+profDados[2].formacao = "Computaçao"
+profDados[2].especialidade = "Desenv. Web"
+profDados[2].aConhecimento = "Programação, BD, Redes"
+profDados[2].aAtuacao = "JAVA, PHP, PYTHON, MySQL"
+profDados[2].eExperiencia = "2 anos - TOTVS"
+profDados[2].eventos = "SBIE 2017 - palestrante"
 
 ----------newRect-------------
 retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
@@ -107,7 +116,7 @@ function pesquisarProfessorNome( event )
 
 		----display.newText options-----
 
-	local rowHeight = row.contentHeight
+		local rowHeight = row.contentHeight
 	    local rowWidth = row.contentWidth
 	 
 	    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
@@ -115,8 +124,14 @@ function pesquisarProfessorNome( event )
 	 
 	    -- Align the label left and vertically centered
 	    rowTitle.anchorX = 0
-	    rowTitle.x = 20
+	    rowTitle.x = 10
 	    rowTitle.y = rowHeight * 0.5
+
+	    t = display.newText(row, "Contratar", 0,0, nil, 14)
+	    t:setFillColor(0)
+	    t.anchorX = 0
+	    t.x = 200
+	    t.y = rowHeight * 0.9
 	end
 
 	local tableView = widget.newTableView({
@@ -130,17 +145,12 @@ function pesquisarProfessorNome( event )
 		listener = scrollListener,
 	})
 
+	for i=1, #profDados do
+		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
+		
 
-	--for row in db:nrows("SELECT * FROM professor") do
-	for row in db:nrows("SELECT * FROM professor") do
-		 listaProf = "Id: "..row.id.."\nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
-		
-		--local rowParams = {
-		--	listaProf,	
-		--}
-		
 		tableView:insertRow({
-			rowHeight = 120,
+			rowHeight = 200,
 
 		--	params = rowParams,
 		})
