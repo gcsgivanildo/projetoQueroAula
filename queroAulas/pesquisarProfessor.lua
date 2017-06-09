@@ -67,18 +67,24 @@ profDados[2].aAtuacao = "JAVA, PHP, PYTHON, MySQL"
 profDados[2].eExperiencia = "2 anos - TOTVS"
 profDados[2].eventos = "SBIE 2017 - palestrante"
 
-----------newRect-------------
+----------CABEÇALHO-------------
+----Background
 retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
 retLogo:setFillColor( 0, 0, 250 )
+
 ret = display.newRect(display.contentCenterX, 84, display.contentWidth * 2, display.contentHeight * 0.08)
 ret:setFillColor( 1, 1, 1 )
+
+----Linha Divisoria
 linha = display.newRect(display.contentCenterX*1.25, 25, display.contentWidth * .008, display.contentHeight * 0.1)
 linha:setFillColor( 1, 1, 1, .7 )
+
+----Logomarca
 local logo = display.newImageRect( "icones/chapeu.png", 80, 80 )
 logo.x = display.contentCenterX / 3.5
 logo.y = display.contentCenterY / 10
 
---------newText------------
+----Texto Logomarca
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 ) 
 local localizacaoTxt = display.newText("Pesquisar Professor", display.contentCenterX/1.8, display.contentCenterY /2.9, native.systemFont, 18 )
 localizacaoTxt:setFillColor( 0, 0, 255 )
@@ -159,8 +165,11 @@ end
 
 	local function chamartelaHome( event )
 		if (event.phase == "ended") then	
-
-		composer.gotoScene( "home" )
+			composer.gotoScene( "home" )
+				function scene:destroy(event)
+					local group = self.view
+					group:remove(pesquisarProfessorNome)
+				end
 		end
 	end
 
