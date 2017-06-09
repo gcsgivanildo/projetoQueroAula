@@ -1,8 +1,10 @@
 -----------composer------------------
 local composer = require( "composer" )
+local dadosProf = require("funcoes")
  
 local scene = composer.newScene()
 composer.removeScene( "home" )
+composer.removeScene( "cadastrarProfessor" )
 
 
 -- create()
@@ -22,7 +24,7 @@ function scene:show( event )
  
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
+  	
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
  
@@ -49,9 +51,9 @@ end
 
 
 -------------banco de dados------------------
-local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
-local db = sqlite3.open( path )
+--local sqlite3 = require("sqlite3")
+--local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
+--local db = sqlite3.open( path )
 
 
 -------require-----------------
@@ -99,17 +101,18 @@ function pesquisarProfessorNome( event )
 	if(event.phase == "ended") then
 		local function onRowRender(event)
 	
-		local row = event.row
+			local row = event.row
 
-		local font = native.systemFont
-		local fontSize = 12
-		local rowHeight = row.height/2
+			local font = native.systemFont
+			local fontSize = 12
+			local rowHeight = row.height/2
 
-		----display.newText options-----
+			----display.newText options-----
 
-		local rowHeight = row.contentHeight
+			local rowHeight = row.contentHeight
 		    local rowWidth = row.contentWidth
 		 
+
 		    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
 		    rowTitle:setFillColor( 0 )
 		 
@@ -130,20 +133,35 @@ function pesquisarProfessorNome( event )
 			listener = scrollListener,
 		})
 
-
-		--for row in db:nrows("SELECT * FROM professor") do
+		 --[[
 		for row in db:nrows("SELECT * FROM professor") do
 			 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
 				
+
 			--local rowParams = {
 			--	listaProf,	
 			--}
 
 			tableView:insertRow({
 				rowHeight = 120,
+				--inicios,
 			--	params = rowParams,
 			})
 		end	
+		-]]
+		
+		print(dadosProf.listarProfessor())
+		
+		
+		for row=1, #dadosProf.listarProfessor() do
+			listaProf = "Professor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNive Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
+			
+			tableView:insertRow({
+				rowHeight = 120,
+				--inicios,
+			--	params = rowParams,
+			})
+		end
 	end
 end
 
