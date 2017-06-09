@@ -1,14 +1,12 @@
+
 -----------composer------------------
 local composer = require("composer")
 
 local scene = composer.newScene()
-
-composer.removeScene( "cadastroProfessor" )
 composer.removeScene( "login")
-composer.removeScene( "home")
-composer.removeScene( "pesquisarProfessor")
-
-
+composer.removeScene( "cadastrarProfessor" )
+composer.removeScene( "main")
+composer.removeScene( "pesquisarProfessor" )
 
 -- create()
 function scene:create( event )
@@ -51,83 +49,93 @@ function scene:hide( event )
 end
 
 
-<<<<<<< HEAD
-
-
--------------banco de dados------------------
-local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
-local db = sqlite3.open( path )
-
-local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY autoincrement, usuario, senha);]]
-print( tableLogin )
-db:exec( tableLogin )
-
-local usuariot = "givanildo"
-local senhat = "cordeiro"
-
-local insertLogin = [[INSERT INTO login VALUES (NULL, ']]..usuariot..[[',']]..senhat..[['); ]]
-db:exec(insertLogin)
-
-
-
--------require-----------------
-=======
->>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 local widget = require ("widget")
 
+----------newImageRect-------------
+local imagehome = display.newImage("imagens/homeQA3.jpg")
+imagehome.x = display.contentWidth/2
+imagehome.y = display.contentHeight/2
+imagehome.width = display.contentWidth*1.2
+imagehome.height = display.contentHeight*1.2
 
 ----------newRect-------------
-retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
-retLogo:setFillColor( 0, 0, 250 )
 ret = display.newRect(display.contentCenterX, 84, display.contentWidth * 2, display.contentHeight * 0.08)
 ret:setFillColor( 1, 1, 1 )
 linha = display.newRect(display.contentCenterX*1.25, 25, display.contentWidth * .008, display.contentHeight * 0.1)
 linha:setFillColor( 1, 1, 1, .7 )
-local logo = display.newImageRect( "icones/chapeu.png", 80, 80 )
-logo.x = display.contentCenterX / 3.5
-logo.y = display.contentCenterY / 10
+local logo = display.newImageRect( "imagens/logo.png", 80, 80)
+logo.x = display.contentCenterX/1.6
+logo.y = display.contentCenterY/12
+logo.width = display.contentWidth/1.8
+logo.height = display.contentHeight/8
 
 --------newText------------
-local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 )
-local bemVindotxt = display.newText("    Seja\nBem Vindo", display.contentCenterX * 1.6, display.contentCenterY/9, native.systemFont, 18 )
-
+local localizacaoTxt = display.newText("Funções do site", display.contentCenterX/2, display.contentCenterY /2.9, native.systemFont, 18 )
+localizacaoTxt:setFillColor( 0, 0, 255 )
 
 local meuGroup = display.newGroup()
-	meuGroup:insert( retLogo )
 	meuGroup:insert( ret )
 	meuGroup:insert( linha )
 	meuGroup:insert( logo )
-	meuGroup:insert( logotxt )
-	meuGroup:insert( bemVindotxt)
+	meuGroup:insert( localizacaoTxt )
 
 -----------funcao--------
-local function chamarHome( event )
+
+
+local function chamarCadastrarProfessor( event )
 	if (event.phase == "ended") then
-		local composer = require("composer")
-		composer.gotoScene( "home" )
+	composer.gotoScene( "cadastrarProfessor" )
 	end
 end
 
---------------botao----------------
-local home = widget.newButton( {
-	x = display.contentWidth /2,
-	y = display.contentHeight/5.7,
-	label = "Clique aqui para ter acesso ao site",
-	id = "entrar",
+local function chamarPesquisarProfessor( event )
+	if (event.phase == "ended") then
+	composer.gotoScene( "pesquisarProfessor" )
+	end
+end
+
+local function chamartelaMain( event )
+	if (event.phase == "ended") then
+	composer.gotoScene( "main" )
+	end
+end
+
+
+-------newButton-----------
+local inicio = widget.newButton( {
+	x = display.contentWidth  /1.25,
+	y = display.contentHeight/18,
+	label = "Início",
+	id = "inicio",
 	fontSize =18,
-	width = 300, height = 30,
+	width = 100, height = 30,
+	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
+    onEvent = chamartelaMain
+	} )
+
+
+local cadastrarProfessor = widget.newButton( {
+	x = display.contentWidth /3.15,
+	y = display.contentHeight/2.8,
+	label = "Cadastar Professor",
+	id = "cadastrarProfessor",
+	fontSize =18,
+	width = 160, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect",
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamarHome
+	onEvent = chamarCadastrarProfessor
 	}  )
+
+
 
 
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(home)
+ 		group:insert(login)
+ 		group:insert(cadastrarProfessor)
+ 		group:insert(pesquisarProfessor)
  		group:insert(meuGroup)
 
     end
@@ -144,3 +152,8 @@ scene:addEventListener( "destroy", scene )
 return scene
 
 --]]
+
+
+
+
+
