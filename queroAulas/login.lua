@@ -51,6 +51,29 @@ function scene:hide( event )
 end
  
 
+<<<<<<< HEAD
+
+
+-------------banco de dados------------------
+local sqlite3 = require("sqlite3")
+local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
+local db = sqlite3.open( path )
+
+local tableLogin = [[CREATE TABLE IF NOT EXISTS login (id INTEGER PRIMARY KEY autoincrement, usuario, senha);]]
+print( tableLogin )
+db:exec( tableLogin )
+
+local usuariot = "givanildo"
+local senhat = "cordeiro"
+
+local insertLogin = [[INSERT INTO login VALUES (NULL, ']]..usuariot..[[',']]..senhat..[['); ]]
+db:exec(insertLogin)
+
+
+
+-------require-----------------
+=======
+>>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 local widget = require ("widget")
 
 

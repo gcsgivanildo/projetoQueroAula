@@ -1,8 +1,10 @@
----------composer------------------
+-----------composer------------------
 local composer = require( "composer" )
+local dadosProf = require("funcoes")
  
 local scene = composer.newScene()
 composer.removeScene( "home" )
+composer.removeScene( "cadastrarProfessor" )
 
 
 -- create()
@@ -22,7 +24,7 @@ function scene:show( event )
  
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
+  	
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
  
@@ -44,28 +46,20 @@ function scene:hide( event )
  
     end
 end
+ 
+
+
+
+-------------banco de dados------------------
+--local sqlite3 = require("sqlite3")
+--local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
+--local db = sqlite3.open( path )
+
 
 -------require-----------------
 local widget = require ("widget")
 
-profDados = {}
-profDados[1] = {}
-profDados[1].nome = "Mução"
-profDados[1].formacao = "Eng. Bioquimico"
-profDados[1].especialidade = "Materiais Organicos"
-profDados[1].aConhecimento = "Quimica Organica e FisicoQuimica"
-profDados[1].aAtuacao = "Aplicacao em solos, eng de alimentos e o escambal a quatro"
-profDados[1].eExperiencia = "3 anos - QuimióBio"
-profDados[1].eventos = "Sbio - Congresso Bárasil"
 
-profDados[2] = {}
-profDados[2].nome = "Jussé"
-profDados[2].formacao = "Computaçao"
-profDados[2].especialidade = "Desenv. Web"
-profDados[2].aConhecimento = "Programação, BD, Redes"
-profDados[2].aAtuacao = "JAVA, PHP, PYTHON, MySQL"
-profDados[2].eExperiencia = "2 anos - TOTVS"
-profDados[2].eventos = "SBIE 2017 - palestrante"
 
 ----------CABEÇALHO-------------
 ----Background
@@ -113,53 +107,68 @@ function pesquisarProfessorNome( event )
 	if(event.phase == "ended") then
 		local function onRowRender(event)
 	
-		local row = event.row
+			local row = event.row
 
-		local font = native.systemFont
-		local fontSize = 12
-		local rowHeight = row.height/2
+			local font = native.systemFont
+			local fontSize = 12
+			local rowHeight = row.height/2
 
-		----display.newText options-----
+			----display.newText options-----
 
-		local rowHeight = row.contentHeight
-	    local rowWidth = row.contentWidth
-	 
-	    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
-	    rowTitle:setFillColor( 0 )
-	 
-	    -- Align the label left and vertically centered
-	    rowTitle.anchorX = 0
-	    rowTitle.x = 10
-	    rowTitle.y = rowHeight * 0.5
+			local rowHeight = row.contentHeight
+		    local rowWidth = row.contentWidth
+		 
 
-	    t = display.newText(row, "Contratar", 0,0, nil, 14)
-	    t:setFillColor(0)
-	    t.anchorX = 0
-	    t.x = 200
-	    t.y = rowHeight * 0.9
-	end
+		    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
+		    rowTitle:setFillColor( 0 )
+		 
+		    -- Align the label left and vertically centered
+		    rowTitle.anchorX = 0
+		    rowTitle.x = 20
+		    rowTitle.y = rowHeight * 0.5
+		end
 
-	local tableView = widget.newTableView({
-		left = 10,
-	    top = 160,
-	    height = 350,
-	    width = 300,
-		onRowRender = onRowRender,
-		onRowTouch = onRowTouch,
-		listener = scrollListener,
-	})
-
-	
-	for i=1, #profDados do
-		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
-
-		tableView:insertRow({
-			rowHeight = 200,
+		 tableView = widget.newTableView({
+			
+			left = 10,
+		    top = 160,
+		    height = 350,
+		    width = 300,
+			onRowRender = onRowRender,
+			onRowTouch = onRowTouch,
+			listener = scrollListener,
 		})
-	end	
 
+		 --[[
+		for row in db:nrows("SELECT * FROM professor") do
+			 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
+				
 
-	end
+			--local rowParams = {
+			--	listaProf,	
+			--}
+
+			tableView:insertRow({
+				rowHeight = 120,
+				--inicios,
+			--	params = rowParams,
+			}) 
+		end	
+		-]]
+		
+		print(dadosProf.listarProfessor())
+		
+		
+		for row=1, #dadosProf.listarProfessor() do
+			listaProf = "Professor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNive Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
+			
+			tableView:insertRow({
+				rowHeight = 120,
+				--inicios,
+			--	params = rowParams,
+			})
+		end
+	end  
 end
 
 
@@ -216,6 +225,7 @@ function scene:destroy( event )
  		--group:insert(senhaTxt)
  		--group:insert(usuarioTxt)
  		group:insert(meuGroup)
+ 		group:insert(tableView)
 
     end
  

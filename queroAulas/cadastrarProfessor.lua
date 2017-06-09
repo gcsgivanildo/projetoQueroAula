@@ -2,6 +2,7 @@
 
 -----------composer------------------
 local composer = require("composer")
+local dadosProf = require("funcoes")
 
 local scene = composer.newScene()
 composer.removeScene( "home" )
@@ -50,13 +51,14 @@ end
  
 
 -------------banco de dados------------------
-local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aula1.db", system.DocumentsDirectory )
-local db = sqlite3.open( path )
 
-local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY autoincrement, nome, usuario, senha, nivelEnsino, formacao);]]
-print( tableProfessor )
-db:exec( tableProfessor )
+--local sqlite3 = require("sqlite3")
+--local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
+--local db = sqlite3.open( path )
+
+--local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY autoincrement, nome, usuario, experienciaProfissional, nivelEnsino, formacao);]]
+--print( tableProfessor )
+--db:exec( tableProfessor )
 
 
 
@@ -87,7 +89,7 @@ local nomeTxt = display.newText("Nome", display.contentCenterX/1.2, display.cont
 
 local usuarioTxt = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
 usuarioTxt:setFillColor( 1, 1, 1 )
-local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /0.85, native.systemFont, 18 )
+local expProfissionalTxt = display.newText("Experiência Profissional", display.contentCenterX /1.5, display.contentCenterY /0.85, native.systemFont, 18 )
 local nivelEnsinoTxt = display.newText("Nível de Ensino", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
 local formacaoTxt = display.newText("Formação", display.contentCenterX/3.1, display.contentCenterY * 1.8, native.systemFont, 18 )
 
@@ -95,7 +97,7 @@ local formacaoTxt = display.newText("Formação", display.contentCenterX/3.1, di
 -------newTextField-----------
 local nomeTf = native.newTextField( display.contentCenterX*1.3 , display.contentCenterY/1.5, display.contentWidth -100, display.contentHeight/15 )
 local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
-local senhaTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY *1.3, display.contentWidth -50, display.contentHeight/15 )
+local expProfissionalTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY *1.3, display.contentWidth -50, display.contentHeight/15 )
 local nivelEnsinoTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.64, display.contentWidth -50, display.contentHeight/15 )
 local formacaoTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.95, display.contentWidth -50, display.contentHeight/15 )
 
@@ -106,15 +108,16 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( logo )
 	meuGroup:insert( logotxt )
 	meuGroup:insert( localizacaoTxt )
-
+ 
 
 ---------------funções-----------------
 function ConcluirCadastroProfessor( event )
-	if(event.phase == "ended") then
-		
-		local insertProfessor = [[INSERT INTO professor VALUES (NULL, ']]..nomeTf.text..[[',']]..usuarioTf.text..[[',']]..senhaTf.text..[[',']]..nivelEnsinoTf.text..[[',']]..formacaoTf.text..[['); ]]
-		print( insertProfessor )
-		db:exec(insertProfessor)			
+	if(event.phase == "ended") then		
+		--local insertProfessor = [[INSERT INTO professor VALUES (NULL, ']]..nomeTf.text..[[',']]..usuarioTf.text..[[',']]..expProfissionalTf.text..[[',']]..nivelEnsinoTf.text..[[',']]..formacaoTf.text..[['); ]]
+		--print( insertProfessor )
+		--db:exec(insertProfessor)
+		dadosProf.inserirProfessor(nomeTf.text, usuarioTf.text, expProfissionalTf.text, nivelEnsinoTf.text, formacaoTf.text)
+				  	
 	end
 end
 
@@ -171,8 +174,8 @@ function scene:destroy( event )
  		group:insert(nomeTf)
  		group:insert(usuarioTxt)
  		group:insert(usuarioTf)
- 		group:insert(senhaTxt)
- 		group:insert(senhaTf)
+ 		group:insert(expProfissionalTxt)
+ 		group:insert(expProfissionalTf)
  		group:insert(nivelEnsinoTxt)
  		group:insert(nivelEnsinoTf)
  		group:insert(formacaoTxt)

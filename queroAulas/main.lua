@@ -1,3 +1,4 @@
+
 -----------composer------------------
 local composer = require("composer")
 
@@ -107,7 +108,7 @@ function scene:destroy( event )
  		group:insert(home)
  		group:insert(meuGroup)
 
-    end
+    end 
  
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners
@@ -118,6 +119,8 @@ scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
 -- -----------------------------------------------------------------------------------
  
-return scene
+return scene  
 
---]]
+
+
+
