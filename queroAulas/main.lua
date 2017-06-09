@@ -1,4 +1,3 @@
-
 -----------composer------------------
 local composer = require("composer")
 
@@ -119,8 +118,14 @@ scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
 -- -----------------------------------------------------------------------------------
  
+<<<<<<< HEAD
 return scene   
 
 
 
 
+=======
+return scene
+
+--]]
+>>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf

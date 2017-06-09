@@ -51,6 +51,12 @@ end
  
 
 -------------banco de dados------------------
+<<<<<<< HEAD
+=======
+local sqlite3 = require("sqlite3")
+local path = system.pathForFile( "quero-aula1.db", system.DocumentsDirectory )
+local db = sqlite3.open( path )
+>>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 
 --local sqlite3 = require("sqlite3")
 --local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )

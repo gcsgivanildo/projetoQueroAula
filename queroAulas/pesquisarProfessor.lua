@@ -1,4 +1,4 @@
------------composer------------------
+---------composer------------------
 local composer = require( "composer" )
 local dadosProf = require("funcoes")
  
@@ -46,6 +46,7 @@ function scene:hide( event )
  
     end
 end
+<<<<<<< HEAD
  
 
 
@@ -55,11 +56,30 @@ end
 --local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
 --local db = sqlite3.open( path )
 
+=======
+>>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 
 -------require-----------------
 local widget = require ("widget")
 
+profDados = {}
+profDados[1] = {}
+profDados[1].nome = "Mução"
+profDados[1].formacao = "Eng. Bioquimico"
+profDados[1].especialidade = "Materiais Organicos"
+profDados[1].aConhecimento = "Quimica Organica e FisicoQuimica"
+profDados[1].aAtuacao = "Aplicacao em solos, eng de alimentos e o escambal a quatro"
+profDados[1].eExperiencia = "3 anos - QuimióBio"
+profDados[1].eventos = "Sbio - Congresso Bárasil"
 
+profDados[2] = {}
+profDados[2].nome = "Jussé"
+profDados[2].formacao = "Computaçao"
+profDados[2].especialidade = "Desenv. Web"
+profDados[2].aConhecimento = "Programação, BD, Redes"
+profDados[2].aAtuacao = "JAVA, PHP, PYTHON, MySQL"
+profDados[2].eExperiencia = "2 anos - TOTVS"
+profDados[2].eventos = "SBIE 2017 - palestrante"
 
 ----------newRect-------------
 retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
@@ -101,6 +121,7 @@ function pesquisarProfessorNome( event )
 	if(event.phase == "ended") then
 		local function onRowRender(event)
 	
+<<<<<<< HEAD
 			local row = event.row
 
 			local font = native.systemFont
@@ -108,6 +129,52 @@ function pesquisarProfessorNome( event )
 			local rowHeight = row.height/2
 
 			----display.newText options-----
+=======
+		local row = event.row
+
+		local font = native.systemFont
+		local fontSize = 12
+		local rowHeight = row.height/2
+
+		----display.newText options-----
+
+		local rowHeight = row.contentHeight
+	    local rowWidth = row.contentWidth
+	 
+	    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
+	    rowTitle:setFillColor( 0 )
+	 
+	    -- Align the label left and vertically centered
+	    rowTitle.anchorX = 0
+	    rowTitle.x = 10
+	    rowTitle.y = rowHeight * 0.5
+
+	    t = display.newText(row, "Contratar", 0,0, nil, 14)
+	    t:setFillColor(0)
+	    t.anchorX = 0
+	    t.x = 200
+	    t.y = rowHeight * 0.9
+	end
+
+	local tableView = widget.newTableView({
+		left = 10,
+	    top = 160,
+	    height = 350,
+	    width = 300,
+		onRowRender = onRowRender,
+		onRowTouch = onRowTouch,
+		listener = scrollListener,
+	})
+
+	
+	for i=1, #profDados do
+		listaProf = "Nome: "..profDados[i].nome.."\nFormacao: "..profDados[i].formacao.."\nEspecialidade: "..profDados[i].especialidade.."\nArea Conhecimento: "..profDados[i].aConhecimento.."\nArea Atuação: "..profDados[i].aAtuacao.."\nExperiencia: "..profDados[i].eExperiencia.."\nEventos: "..profDados[i].eventos
+
+		tableView:insertRow({
+			rowHeight = 200,
+		})
+	end	
+>>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 
 			local rowHeight = row.contentHeight
 		    local rowWidth = row.contentWidth
