@@ -162,7 +162,7 @@ function pesquisarProfessorNome( event )
 			--	params = rowParams,
 			})
 		end
-	end
+	end  
 end
 
 

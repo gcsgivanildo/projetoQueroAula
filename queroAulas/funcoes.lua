@@ -19,4 +19,4 @@ dadosProfessor[1] = {nome="Maria", usuario="maria21", expProfissional="6 anos", 
 		return dadosProfessor
 	end
 
-return class
+return class  

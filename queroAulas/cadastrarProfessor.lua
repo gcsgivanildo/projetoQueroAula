@@ -117,7 +117,7 @@ function ConcluirCadastroProfessor( event )
 		--print( insertProfessor )
 		--db:exec(insertProfessor)
 		dadosProf.inserirProfessor(nomeTf.text, usuarioTf.text, expProfissionalTf.text, nivelEnsinoTf.text, formacaoTf.text)
-					
+				  	
 	end
 end
 
