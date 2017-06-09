@@ -148,7 +148,7 @@ function pesquisarProfessorNome( event )
 			--	params = rowParams,
 			}) 
 		end	
-		-]]
+		-]]  
 		
 		print(dadosProf.listarProfessor())
 		
