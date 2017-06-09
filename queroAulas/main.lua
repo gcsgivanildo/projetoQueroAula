@@ -108,7 +108,7 @@ function scene:destroy( event )
  		group:insert(home)
  		group:insert(meuGroup)
 
-    end
+    end 
  
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners

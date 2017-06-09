@@ -108,7 +108,7 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( logo )
 	meuGroup:insert( logotxt )
 	meuGroup:insert( localizacaoTxt )
-
+ 
 
 ---------------funções-----------------
 function ConcluirCadastroProfessor( event )

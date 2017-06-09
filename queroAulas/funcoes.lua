@@ -11,7 +11,7 @@ dadosProfessor[1] = {nome="Maria", usuario="maria21", expProfissional="6 anos", 
 				end
 				--print(dadosProfessor[i].nome)
 		end	 
-	end
+	end 
 
 
 	function class.listarProfessor(  )

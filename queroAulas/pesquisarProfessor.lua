@@ -146,7 +146,7 @@ function pesquisarProfessorNome( event )
 				rowHeight = 120,
 				--inicios,
 			--	params = rowParams,
-			})
+			}) 
 		end	
 		-]]
 		
