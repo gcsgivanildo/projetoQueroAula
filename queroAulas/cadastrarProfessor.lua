@@ -51,12 +51,6 @@ end
  
 
 -------------banco de dados------------------
-<<<<<<< HEAD
-=======
-local sqlite3 = require("sqlite3")
-local path = system.pathForFile( "quero-aula1.db", system.DocumentsDirectory )
-local db = sqlite3.open( path )
->>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 
 --local sqlite3 = require("sqlite3")
 --local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
@@ -98,7 +92,7 @@ usuarioTxt:setFillColor( 1, 1, 1 )
 local expProfissionalTxt = display.newText("Experiência Profissional", display.contentCenterX /1.5, display.contentCenterY /0.85, native.systemFont, 18 )
 local nivelEnsinoTxt = display.newText("Nível de Ensino", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
 local formacaoTxt = display.newText("Formação", display.contentCenterX/3.1, display.contentCenterY * 1.8, native.systemFont, 18 )
-  
+
 
 -------newTextField-----------
 local nomeTf = native.newTextField( display.contentCenterX*1.3 , display.contentCenterY/1.5, display.contentWidth -100, display.contentHeight/15 )
