@@ -47,15 +47,6 @@ function scene:hide( event )
     end
 end
  
-
-
-
--------------banco de dados------------------
---local sqlite3 = require("sqlite3")
---local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
---local db = sqlite3.open( path )
-
-
 -------require-----------------
 local widget = require ("widget")
 
@@ -107,66 +98,69 @@ function pesquisarProfessorNome( event )
 	if(event.phase == "ended") then
 		local function onRowRender(event)
 	
-			local row = event.row
-
+			row = event.row
+			
 			local font = native.systemFont
 			local fontSize = 12
 			local rowHeight = row.height/2
 
 			----display.newText options-----
-
 			local rowHeight = row.contentHeight
 		    local rowWidth = row.contentWidth
 		 
 
-		    local rowTitle = display.newText( row, listaProf, 0, 0, nil, 14 )
+		    local rowTitle = display.newText(row, listaProf, 0, 0, nil, 14 )
 		    rowTitle:setFillColor( 0 )
 		 
 		    -- Align the label left and vertically centered
 		    rowTitle.anchorX = 0
 		    rowTitle.x = 20
 		    rowTitle.y = rowHeight * 0.5
-		end
+
+		    row.b = widget.newButton{
+		 		left= 135,
+		    	top = 15, 
+		    	label = "Negociar",
+		    	id = idProf,
+				-- Properties for a rounded rectangle button
+		        shape = "roundedRect",
+		        width = 100,
+		        height = 40,
+		        cornerRadius = 2,
+		        fillColor = { default={1,0,0,1}, over={1,0.1,0.7,0.4} },
+		        strokeColor = { default={1,0.4,0,1}, over={0.8,0.8,1,1} },
+		        strokeWidth = 3
+		       -- onEvent = 
+		    }
+		    row.b.anchorX = 0
+		    row.b.anchorY = 0
+			
+			row:insert(row.b)
+		--print("testando se a id está sendo atribuida"..row.b.id)
+	end
 
 		 tableView = widget.newTableView({
-			
 			left = 10,
 		    top = 160,
 		    height = 350,
 		    width = 300,
 			onRowRender = onRowRender,
 			onRowTouch = onRowTouch,
-			listener = scrollListener,
+			listener = scrollListener
 		})
-
-		 --[[
-		for row in db:nrows("SELECT * FROM professor") do
-			 listaProf = "Id: "..row.id.." \nProfessor: " ..row.nome.." \nUsuario: "..row.usuario.." \nExp Prof: "..row.senha.." \nNive Ensino: "..row.nivelEnsino.." \nFormacao: "..row.formacao
 				
-
-			--local rowParams = {
-			--	listaProf,	
-			--}
-
-			tableView:insertRow({
-				rowHeight = 120,
-				--inicios,
-			--	params = rowParams,
-			}) 
-		end	
-		-]]
-		
-		print(dadosProf.listarProfessor())
-		
-		
 		for row=1, #dadosProf.listarProfessor() do
-			listaProf = "Professor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNive Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
+			listaProf = "Id: "..dadosProf.listarProfessor()[row].id.."\nProfessor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNive Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
 			
+			idProf = dadosProf.listarProfessor()[row].id
+
 			tableView:insertRow({
 				rowHeight = 120,
-				--inicios,
-			--	params = rowParams,
-			})
+				rowColor = { default={ 0.8, 0.8, 0.8, 0.8 }},
+       			lineColor = { 1, 0, 0 },
+       			 
+       		})
+
 		end
 	end  
 end

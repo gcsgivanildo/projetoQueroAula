@@ -1,11 +1,10 @@
-
-
 -----------composer------------------
 local composer = require("composer")
 local dadosProf = require("funcoes")
 
 local scene = composer.newScene()
 composer.removeScene( "home" )
+composer.removeScene( "cadastrarProfessor" )
 
 
 
@@ -49,23 +48,8 @@ function scene:hide( event )
     end
 end
  
-
--------------banco de dados------------------
-
---local sqlite3 = require("sqlite3")
---local path = system.pathForFile( "quero-aulas.db", system.DocumentsDirectory )
---local db = sqlite3.open( path )
-
---local tableProfessor = [[CREATE TABLE IF NOT EXISTS professor (id INTEGER PRIMARY KEY autoincrement, nome, usuario, experienciaProfissional, nivelEnsino, formacao);]]
---print( tableProfessor )
---db:exec( tableProfessor )
-
-
-
 -------require-----------------
 local widget = require ("widget")
-
-
 
 ----------newRect-------------
 retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
@@ -85,7 +69,6 @@ localizacaoTxt:setFillColor( 0, 0, 255 )
 
 
 local nomeTxt = display.newText("Nome", display.contentCenterX/1.2, display.contentCenterY /1.9, native.systemFont, 18 )
---nomeTxt:setFillColor( 1, 1, 1 )
 
 local usuarioTxt = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
 usuarioTxt:setFillColor( 1, 1, 1 )
@@ -113,9 +96,6 @@ local meuGroup = display.newGroup()
 ---------------funções-----------------
 function ConcluirCadastroProfessor( event )
 	if(event.phase == "ended") then		
-		--local insertProfessor = [[INSERT INTO professor VALUES (NULL, ']]..nomeTf.text..[[',']]..usuarioTf.text..[[',']]..expProfissionalTf.text..[[',']]..nivelEnsinoTf.text..[[',']]..formacaoTf.text..[['); ]]
-		--print( insertProfessor )
-		--db:exec(insertProfessor)
 		dadosProf.inserirProfessor(nomeTf.text, usuarioTf.text, expProfissionalTf.text, nivelEnsinoTf.text, formacaoTf.text)
 				  	
 	end
@@ -124,7 +104,6 @@ end
 
 local function chamartelaHome( event )
 	if (event.phase == "ended") then	
-
 	composer.gotoScene( "home" )
 	end
 end
@@ -132,7 +111,7 @@ end
 
 -------newButton-----------
 local inicio = widget.newButton( {
-	x = display.contentWidth  /1.25,
+	x = display.contentWidth/1.25,
 	y = display.contentHeight/18,
 	label = "Início",	
 	id = "inicio",
@@ -147,7 +126,7 @@ local inicio = widget.newButton( {
 local cadastrar = widget.newButton( {
 	x = display.contentWidth /5.2,
 	y = display.contentHeight *1.05,
-	label = "cadastar",	
+	label = "cadastrar",	
 	id = "cadastrar",
 	fontSize =18,
 	width = 100, height = 30,

@@ -3,11 +3,10 @@
 local composer = require("composer")
 
 local scene = composer.newScene()
-
 composer.removeScene( "cadastroProfessor" )
 composer.removeScene( "login")
 composer.removeScene( "home")
-composer.removeScene( "pesquisarProfessor")
+--composer.removeScene( "pesquisarProfessor")
 
 
 
@@ -125,7 +124,7 @@ local entrar = widget.newButton( {
 	x = display.contentCenterX,
 	y = display.contentCenterY*1.2,
 	id = "cadastrar",
-	label = "Cadastra-se",
+	label = "Cadastrar-se",
 	width = 100,
 	height = 40,
 	labelColor = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },

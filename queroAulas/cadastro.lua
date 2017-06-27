@@ -1,6 +1,7 @@
 
 -----------composer------------------
 local composer = require("composer")
+local widget = require ("widget")
 
 local scene = composer.newScene()
 composer.removeScene( "login")
@@ -13,8 +14,7 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-
-end
+	end
 
 
 -- show()
@@ -49,7 +49,7 @@ function scene:hide( event )
 end
 
 
-local widget = require ("widget")
+
 
 ----------newImageRect-------------
 local imagehome = display.newImage("imagens/homeQA3.jpg")
@@ -100,7 +100,18 @@ local function chamartelaMain( event )
 	end
 end
 
+local function chamarpropostaAluno( event )
+if(event.phase == "ended") then
+local composer = require("composer")
+composer.gotoScene( "propostaAluno")
+	end
+end
 
+local function chamartelaRespProfessor( event )
+	if (event.phase == "ended") then
+	composer.gotoScene( "respostaProfessor" )
+	end
+end
 -------newButton-----------
 local inicio = widget.newButton( {
 	x = display.contentWidth  /1.25,
@@ -113,11 +124,10 @@ local inicio = widget.newButton( {
     onEvent = chamartelaMain
 	} )
 
-
 local cadastrarProfessor = widget.newButton( {
 	x = display.contentWidth /3.15,
 	y = display.contentHeight/2.8,
-	label = "Cadastar Professor",
+	label = "Cadastrar Professor",
 	id = "cadastrarProfessor",
 	fontSize =18,
 	width = 160, height = 30,
@@ -127,18 +137,39 @@ local cadastrarProfessor = widget.newButton( {
 	onEvent = chamarCadastrarProfessor
 	}  )
 
+local prpstAluno = widget.newButton( {
+	x = display.contentWidth /3.15,
+	y = display.contentHeight/2,
+	label = "Proposta Aluno",
+	id = "propostaaluno",
+	fontSize =18,
+	width = 160, height = 30,
+	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
+	shape = "roundedrect",
+	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
+	onEvent = chamarpropostaAluno
+	}  )
 
-
+local respProfessor = widget.newButton( {
+	x = display.contentWidth /3.15,
+	y = display.contentHeight/1.5,
+	label = "Resp. Professor",
+	id = "respostaProfessor",
+	fontSize =18,
+	width = 160, height = 30,
+	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
+	shape = "roundedrect",
+	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
+	onEvent = chamartelaRespProfessor
+	}  )
 
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(login)
  		group:insert(cadastrarProfessor)
- 		group:insert(pesquisarProfessor)
- 		group:insert(meuGroup)
-
-    end
+ 		group:insert(prpstAluno)
+ 		group:insert(respProfessor)
+ end
 
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners

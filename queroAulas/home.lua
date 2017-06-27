@@ -119,6 +119,8 @@ local inicio = widget.newButton( {
 	} )
 
 
+--[[ removi pra colocar só o essencial
+
 local login = widget.newButton( {
 	x = display.contentWidth /4.5,
 	y = display.contentHeight/3.6,
@@ -135,7 +137,7 @@ local login = widget.newButton( {
 local cadastrarProfessor = widget.newButton( {
 	x = display.contentWidth /3.15,
 	y = display.contentHeight/2.8,
-	label = "Cadastar Professor",
+	label = "CadastXar Professor",
 	id = "cadastrarProfessor",
 	fontSize =18,
 	width = 160, height = 30,
@@ -144,6 +146,8 @@ local cadastrarProfessor = widget.newButton( {
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
 	onEvent = chamarCadastrarProfessor
 	}  )
+
+	--]]
 
 	local pesquisarProfessor = widget.newButton( {
 	x = display.contentWidth /3.15,
@@ -163,10 +167,10 @@ local cadastrarProfessor = widget.newButton( {
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(login)
- 		group:insert(cadastrarProfessor)
+ 		--group:insert(login)
+ 		--group:insert(cadastrarProfessor)
  		group:insert(pesquisarProfessor)
- 		group:insert(meuGroup)
+ 		--group:insert(meuGroup)
 
     end
 
