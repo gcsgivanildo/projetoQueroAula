@@ -3,10 +3,16 @@
 local composer = require("composer")
 
 local scene = composer.newScene()
-composer.removeScene( "cadastroProfessor" )
-composer.removeScene( "login")
+--[[composer.removeScene( "login")
 composer.removeScene( "home")
---composer.removeScene( "pesquisarProfessor")
+composer.removeScene( "cadastroProfessor" )
+composer.removeScene( "respostaProfessor" )
+composer.removeScene( "pesquisarProfessor")
+composer.removeScene( "negociacaoProfessor" )
+composer.removeScene( "cadastro" )
+composer.removeScene( "aceiteProfessor" )
+composer.removeScene( "confirmaPropostaAluno" )--]]
+
 
 
 
@@ -68,13 +74,7 @@ imagehome.y = display.contentHeight/2
 imagehome.width = display.contentWidth*1.2
 imagehome.height = display.contentHeight*1.2
 
-----------newRect-------------
---retLogo = display.newRect(display.contentCenterX, 22, display.contentWidth * 2, display.contentHeight * 0.18)
---retLogo:setFillColor( 0, 0, 250 )
---ret = display.newRect(display.contentCenterX, 84, display.contentWidth * 2, display.contentHeight * 0.08)
---ret:setFillColor( 1, 1, 1 )
---linha = display.newRect(display.contentCenterX*1.25, 25, display.contentWidth * .008, display.contentHeight * 0.1)
---linha:setFillColor( 1, 1, 1, .7 )
+
 local linha = display.newLine (1, display.contentCenterY/10, display.contentWidth, display.contentCenterY/10)
 local logo = display.newImageRect( "imagens/logo.png", 80, 80)
 logo.x = display.contentCenterX
@@ -117,7 +117,7 @@ local entrar = widget.newButton( {
 	overFile = "botoes/entrarover.png",
 	width = 100,
 	height = 40,
-	onEvent = chamarlogin
+	--onEvent = chamarlogin
 	}  )
 
 	local cadastrar = widget.newButton( {
@@ -128,7 +128,7 @@ local entrar = widget.newButton( {
 	width = 100,
 	height = 40,
 	labelColor = { default={ 1, 1, 1 }, over={ 0, 0, 0, 0.5 } },
-	onEvent = chamarCadastro
+	--onEvent = chamarCadastro
 	}
 	)
 
@@ -143,7 +143,6 @@ local entrar = widget.newButton( {
 	onEvent = chamarHome
 	}
 	)
-
 
 -- destroy()
 function scene:destroy( event )

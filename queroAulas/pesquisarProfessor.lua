@@ -1,6 +1,8 @@
 -----------composer------------------
 local composer = require( "composer" )
 local dadosProf = require("funcoes")
+-----------require------------------
+local widget = require ("widget")
  
 local scene = composer.newScene()
 composer.removeScene( "home" )
@@ -9,10 +11,8 @@ composer.removeScene( "cadastrarProfessor" )
 
 -- create()
 function scene:create( event )
- 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
- 
 end
  
  
@@ -46,11 +46,6 @@ function scene:hide( event )
  
     end
 end
- 
--------require-----------------
-local widget = require ("widget")
-
-
 
 ----------CABEÇALHO-------------
 ----Background
@@ -79,7 +74,27 @@ localizacaoTxt:setFillColor( 0, 0, 255 )
 
 --local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /1.16, native.systemFont, 18 )
 --senhaTxt:setFillColor( 1, 1, 1 )
+local function chamartelaHome( event )
+	if (event.phase == "ended") then	
+		composer.gotoScene( "home" )
+			function scene:destroy(event)
+			local group = self.view
+			group:remove(pesquisarProfessorNome)
+		end
+	end
+end
 
+---------------=========aqui efetuar testes
+local function chamartelaPropostaAluno( event )
+	if (event.phase == "ended") then	
+		composer.gotoScene( "propostaAluno" )
+			function scene:hide(event)
+			local group = self.view
+			group:insert(pesquisarProfessorNome)
+		end
+	end
+end
+	
 
 local meuGroup = display.newGroup()
 	meuGroup:insert( retLogo )
@@ -129,8 +144,8 @@ function pesquisarProfessorNome( event )
 		        cornerRadius = 2,
 		        fillColor = { default={1,0,0,1}, over={1,0.1,0.7,0.4} },
 		        strokeColor = { default={1,0.4,0,1}, over={0.8,0.8,1,1} },
-		        strokeWidth = 3
-		       -- onEvent = 
+		        strokeWidth = 3,
+		        onEvent = chamartelaPropostaAluno
 		    }
 		    row.b.anchorX = 0
 		    row.b.anchorY = 0
@@ -153,7 +168,7 @@ function pesquisarProfessorNome( event )
 			listaProf = "Id: "..dadosProf.listarProfessor()[row].id.."\nProfessor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNive Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
 			
 			idProf = dadosProf.listarProfessor()[row].id
-
+			--print ("gagagaga "..idProf)
 			tableView:insertRow({
 				rowHeight = 120,
 				rowColor = { default={ 0.8, 0.8, 0.8, 0.8 }},
@@ -165,19 +180,13 @@ function pesquisarProfessorNome( event )
 	end  
 end
 
-
-	local function chamartelaHome( event )
-		if (event.phase == "ended") then	
-			composer.gotoScene( "home" )
-				function scene:destroy(event)
-					local group = self.view
-					group:remove(pesquisarProfessorNome)
-				end
-		end
-	end
+--[[teste = 10
+print (teste)--]]
+--print (pesquisarProfessorNome()[i].row.b)
+--print ("id".. dadosProf.listarProfessor()[row].nome)
 
 
-	-----------------------------
+-----------------------------
 
 -------newButton-----------
 local inicio = widget.newButton( {
@@ -193,7 +202,7 @@ local inicio = widget.newButton( {
     onEvent = chamartelaHome 
 	} )
 
-local pesquisarProfessorNome = widget.newButton( {
+local btnPesqProfNome = widget.newButton( {
 	x = display.contentWidth /2,
 	y = display.contentHeight / 3.5,
 	label = "Listar Professor por nome",	
@@ -208,12 +217,11 @@ local pesquisarProfessorNome = widget.newButton( {
     onEvent = pesquisarProfessorNome
 	}  )
 
-	
-	
+
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(pesquisarProfessorNome)
+ 		group:insert(btnPesqProfNome)
  		group:insert(inicio)
  		--group:insert(senhaTf)
  		--group:insert(senhaTxt)

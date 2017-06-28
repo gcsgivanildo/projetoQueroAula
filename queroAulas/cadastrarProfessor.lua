@@ -68,21 +68,54 @@ local localizacaoTxt = display.newText("Cadastro de Professor", display.contentC
 localizacaoTxt:setFillColor( 0, 0, 255 )
 
 
-local nomeTxt = display.newText("Nome", display.contentCenterX/1.2, display.contentCenterY /1.9, native.systemFont, 18 )
-
-local usuarioTxt = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
-usuarioTxt:setFillColor( 1, 1, 1 )
-local expProfissionalTxt = display.newText("Experiência Profissional", display.contentCenterX /1.5, display.contentCenterY /0.85, native.systemFont, 18 )
-local nivelEnsinoTxt = display.newText("Nível de Ensino", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
-local formacaoTxt = display.newText("Formação", display.contentCenterX/3.1, display.contentCenterY * 1.8, native.systemFont, 18 )
+local lblnome = display.newText("Nome", display.contentCenterX/4.6, display.contentCenterY /1.9, native.systemFont, 18 )
+local lblusuario = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
+lblusuario:setFillColor( 1, 1, 1 )
+local lblexpProfissional = display.newText("Experiência Profissional", display.contentCenterX /1.5, display.contentCenterY /0.85, native.systemFont, 18 )
+local lblnivelEnsino = display.newText("Nível de Ensino", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
+local lblformacao = display.newText("Formação", display.contentCenterX/3.1, display.contentCenterY * 1.8, native.systemFont, 18 )
 
 
 -------newTextField-----------
-local nomeTf = native.newTextField( display.contentCenterX*1.3 , display.contentCenterY/1.5, display.contentWidth -100, display.contentHeight/15 )
-local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
+local nomeTf = native.newTextField( display.contentCenterX/1.1 , display.contentCenterY/1.5, display.contentWidth -50, display.contentHeight/15 )
+local usuarioTf = native.newTextField( display.contentCenterX/1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
 local expProfissionalTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY *1.3, display.contentWidth -50, display.contentHeight/15 )
 local nivelEnsinoTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.64, display.contentWidth -50, display.contentHeight/15 )
 local formacaoTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.95, display.contentWidth -50, display.contentHeight/15 )
+
+local cadastrar = widget.newButton( {
+	x = display.contentWidth /5.2,
+	y = display.contentHeight *1.05,
+	label = "Cadastrar",	
+	id = "cadastrar",
+	fontSize =18,
+	width = 100, height = 30,
+	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
+	shape = "roundedrect", 
+	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
+	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
+    strokeWidth = 1,
+    onEvent = ConcluirCadastroProfessor	
+	}  )
+
+
+local grpFormCadastro = display.newGroup()
+		--
+		grpFormCadastro:insert(lblnome)
+		grpFormCadastro:insert(lblusuario)
+		grpFormCadastro:insert(lblexpProfissional)
+		grpFormCadastro:insert(lblnivelEnsino)
+		grpFormCadastro:insert(lblformacao)
+		--
+		grpFormCadastro:insert(nomeTf)
+		grpFormCadastro:insert(usuarioTf)
+		grpFormCadastro:insert(expProfissionalTf)
+		grpFormCadastro:insert(nivelEnsinoTf)
+		grpFormCadastro:insert(formacaoTf)
+		--
+		grpFormCadastro:insert(cadastrar)
+
+
 
 local meuGroup = display.newGroup()
 	meuGroup:insert( retLogo )
@@ -96,8 +129,7 @@ local meuGroup = display.newGroup()
 ---------------funções-----------------
 function ConcluirCadastroProfessor( event )
 	if(event.phase == "ended") then		
-		dadosProf.inserirProfessor(nomeTf.text, usuarioTf.text, expProfissionalTf.text, nivelEnsinoTf.text, formacaoTf.text)
-				  	
+		dadosProf.inserirProfessor(nomeTf.text, usuarioTf.text, expProfissionalTf.text, nivelEnsinoTf.text, formacaoTf.text)			  	
 	end
 end
 
@@ -123,21 +155,6 @@ local inicio = widget.newButton( {
     onEvent = chamartelaHome
 	} )
 
-local cadastrar = widget.newButton( {
-	x = display.contentWidth /5.2,
-	y = display.contentHeight *1.05,
-	label = "cadastrar",	
-	id = "cadastrar",
-	fontSize =18,
-	width = 100, height = 30,
-	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-	shape = "roundedrect", 
-	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
-    strokeWidth = 1,
-    onEvent = ConcluirCadastroProfessor	
-	}  )
-
 
 
 --local visitanteTxt = display.newText("Acessar como visitante", display.contentCenterX, display.contentCenterY*2.1, native.systemFont, 18 )
@@ -149,17 +166,7 @@ local cadastrar = widget.newButton( {
 -- destroy()
 function scene:destroy( event )
         local group = self.view
- 		group:insert(nomeTxt)
- 		group:insert(nomeTf)
- 		group:insert(usuarioTxt)
- 		group:insert(usuarioTf)
- 		group:insert(expProfissionalTxt)
- 		group:insert(expProfissionalTf)
- 		group:insert(nivelEnsinoTxt)
- 		group:insert(nivelEnsinoTf)
- 		group:insert(formacaoTxt)
- 		group:insert(formacaoTf)
- 		group:insert(cadastrar)
+ 		group:insert(grpFormCadastro)
  		group:insert(inicio)
  		group:insert(meuGroup)
 

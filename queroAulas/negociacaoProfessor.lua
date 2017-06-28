@@ -10,7 +10,7 @@ local widget = require ("widget")
 
 local scene = composer.newScene()
 --composer.removeScene( "home" )
-composer.removeScene("cadastro")
+composer.removeScene("respostaProfessor")
 
 -- create()
 function scene:create( event )
@@ -83,7 +83,7 @@ logo.y = display.contentCenterY / 10
 
 --------newText------------
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 )
-local localizacaoTxt = display.newText("Aluno: Thor", display.contentCenterX/1.6, display.contentCenterY /2.9, native.systemFont, 18 )
+local localizacaoTxt = display.newText("Painel de Negociação > Professor", display.contentCenterX/1.6, display.contentCenterY /2.9, native.systemFont, 12 )
 localizacaoTxt:setFillColor( 0, 0, 255 )
 
 
@@ -95,55 +95,47 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( logotxt )
 	meuGroup:insert( localizacaoTxt )
 
+local lblValor = display.newText("Valor: ", display.contentCenterX/4.5, display.contentCenterY /1.90, native.systemFont, 14 )
+local lblQntHoras = display.newText("Qnts Horas?: ", display.contentCenterX + 35, display.contentCenterY /1.90, native.systemFont, 14 )
+local lblDisp = display.newText("Horários Disponíveis: ", display.contentCenterX/2.1, display.contentCenterY/1.3, native.systemFont, 14 )
+local lblDtDisp = display.newText("Datas Disponíveis: ", display.contentCenterX/2.4, display.contentCenterY/0.90, native.systemFont, 14 )
 
+local txtFldValor = native.newTextField( display.contentCenterX/2.4, display.contentCenterY/1.5555, display.contentWidth-200, display.contentHeight/15 )
+local txtFldQntHoras = native.newTextField( display.contentCenterX + 55, display.contentCenterY/1.5555, display.contentWidth-200, display.contentHeight/15 )
+local txtFldDisp = native.newTextField( display.contentCenterX/1.1 , display.contentCenterY/1.1, display.contentWidth-40, display.contentHeight/15 )
+local txtFldDtDisp = native.newTextField( display.contentCenterX/1.1 , display.contentCenterY/0.80, display.contentWidth-40, display.contentHeight/15 )
 
-local lblOferta = display.newText("Ofertou: ", display.contentCenterX/4.5, display.contentCenterY /1.90, native.systemFont, 14 )
-local lblPrecisa = display.newText("Precisa de: ", display.contentCenterX + 35, display.contentCenterY /1.90, native.systemFont, 14 )
-local lblTema = display.newText("De aulas do tema: ", display.contentCenterX/2.5, display.contentCenterY/1.3, native.systemFont, 14 )
-
-local txtFldOferta = native.newTextField( display.contentCenterX/2.4, display.contentCenterY/1.5555, display.contentWidth-200, display.contentHeight/15 )
-local txtFldPrecisa = native.newTextField( display.contentCenterX + 55, display.contentCenterY/1.5555, display.contentWidth-200, display.contentHeight/15 )
-local txtFldTema = native.newTextField( display.contentCenterX/1.1 , display.contentCenterY/1.1, display.contentWidth-40, display.contentHeight/15 )
-
-local btnAceitar = widget.newButton( {
-	x = display.contentWidth/4.3,
-	y = display.contentHeight/1.8,
-	label = "Aceitar",	
-	id = "aceitar",
+local btnEnviar = widget.newButton( {
+	x = display.contentWidth/2,
+	y = display.contentHeight/1.3,
+	label = "Enviar",	
+	id = "enviar",
 	fontSize =18,
-	width = 140, height = 30,
+	width = 250, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect", 
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},	
-    onEvent = chamartelaAceitar
+    --onEvent = chamartelaAceitar
 	} )
-
-local btnNegociar = widget.newButton( {
-	x = display.contentWidth/1.41,
-	y = display.contentHeight/1.8,
-	label = "Negociar",	
-	id = "negociar",
-	fontSize =18,
-	width = 140, height = 30,
-	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-	shape = "roundedrect", 
-	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},	
-    --onEvent = chamartelaNegociar
-	} )
-
 
 local grpFormRespProf = display.newGroup()
-grpFormRespProf:insert(lblOferta)
-grpFormRespProf:insert(lblPrecisa)
-grpFormRespProf:insert(lblTema)
-grpFormRespProf:insert(txtFldOferta)
-grpFormRespProf:insert(txtFldPrecisa)
-grpFormRespProf:insert(txtFldTema)
-grpFormRespProf:insert(btnAceitar)
-grpFormRespProf:insert(btnNegociar)
+grpFormRespProf:insert(lblValor)
+grpFormRespProf:insert(lblQntHoras)
+grpFormRespProf:insert(lblDisp)
+grpFormRespProf:insert(lblDtDisp)
+--
+grpFormRespProf:insert(txtFldValor)
+grpFormRespProf:insert(txtFldQntHoras)
+grpFormRespProf:insert(txtFldDisp)
+grpFormRespProf:insert(txtFldDtDisp)
+--
+grpFormRespProf:insert(btnEnviar)
 
 grpFormRespProf.anchorX = 0
 grpFormRespProf.anchorY = 0
+
+--grpFormRespProf.x = display.contentCenterX/2
+--grpFormRespProf.y = display.contentCenterY/2
 -------newButton-----------
 local inicio = widget.newButton( {
 	x = display.contentWidth  /1.25,
@@ -174,6 +166,7 @@ local rtlProf = display.newText("Professor(a): Maria", 10, 70, native.systemFont
 function scene:destroy( event )
        local group = self.view
  		group:insert(grpFormRespProf)
+ 		group:insert(meuGroup)
  		
 end
  

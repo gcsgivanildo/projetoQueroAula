@@ -3,14 +3,10 @@ local composer = require("composer")
 local dadosProf = require("funcoes")
 local widget = require ("widget")
 
---seta todos objetos display para anchorX e anchorY na posição desejada
---display.setDefault("anchorX", 0)
---display.setDefault("anchorY", 0)
---display.setDefault("background", 0,0,0)
-
 local scene = composer.newScene()
---composer.removeScene( "home" )
+composer.removeScene( "home" )
 composer.removeScene("cadastro")
+
 
 -- create()
 function scene:create( event )
@@ -59,6 +55,13 @@ local function chamartelaAceitar( event )
 	if (event.phase == "ended") then	
 
 	composer.gotoScene( "aceiteProfessor" )
+	end
+end
+
+local function chamartelaNegociar( event )
+	if (event.phase == "ended") then	
+
+	composer.gotoScene( "negociacaoProfessor" )
 	end
 end
 
@@ -130,7 +133,7 @@ local btnNegociar = widget.newButton( {
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect", 
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},	
-    --onEvent = chamartelaNegociar
+    onEvent = chamartelaNegociar
 	} )
 
 
@@ -147,6 +150,7 @@ grpFormRespProf:insert(btnNegociar)
 grpFormRespProf.anchorX = 0
 grpFormRespProf.anchorY = 0
 -------newButton-----------
+
 local inicio = widget.newButton( {
 	x = display.contentWidth  /1.25,
 	y = display.contentHeight/18,
@@ -160,22 +164,12 @@ local inicio = widget.newButton( {
     onEvent = chamartelaHome
 	} )
 
-------Professor escolhido
-local rtlProf = display.newText("Professor(a): Maria", 10, 70, native.systemFont, 9)
-
---local linha = display.newLine (2, display.contentCenterY/2, display.contentWidth, display.contentCenterY/2)
-
-
---local visitanteTxt = display.newText("Acessar como visitante", display.contentCenterX, display.contentCenterY*2.1, native.systemFont, 18 )
---visitanteTxt:setFillColor( 1, 1, 1, .7 )
-
-
-
 
 -- destroy()
 function scene:destroy( event )
        local group = self.view
  		group:insert(grpFormRespProf)
+ 		group:insert(meuGroup)
  		
 end
  

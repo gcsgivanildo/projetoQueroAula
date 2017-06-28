@@ -5,9 +5,13 @@ local widget = require ("widget")
 
 local scene = composer.newScene()
 composer.removeScene( "login")
-composer.removeScene( "cadastrarProfessor" )
+--composer.removeScene( "cadastrarProfessor" )
 composer.removeScene( "main")
 composer.removeScene( "pesquisarProfessor" )
+composer.removeScene( "respostaProfessor" )
+composer.removeScene( "pesquisarProfessor" )
+composer.removeScene( "home" )
+
 
 -- create()
 function scene:create( event )
@@ -94,24 +98,12 @@ local function chamarPesquisarProfessor( event )
 	end
 end
 
-local function chamartelaMain( event )
+local function chamartelaHome( event )
 	if (event.phase == "ended") then
-	composer.gotoScene( "main" )
+	composer.gotoScene( "home" )
 	end
 end
 
-local function chamarpropostaAluno( event )
-if(event.phase == "ended") then
-local composer = require("composer")
-composer.gotoScene( "propostaAluno")
-	end
-end
-
-local function chamartelaRespProfessor( event )
-	if (event.phase == "ended") then
-	composer.gotoScene( "respostaProfessor" )
-	end
-end
 -------newButton-----------
 local inicio = widget.newButton( {
 	x = display.contentWidth  /1.25,
@@ -121,7 +113,7 @@ local inicio = widget.newButton( {
 	fontSize =18,
 	width = 100, height = 30,
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-    onEvent = chamartelaMain
+    onEvent = chamartelaHome
 	} )
 
 local cadastrarProfessor = widget.newButton( {
@@ -137,31 +129,7 @@ local cadastrarProfessor = widget.newButton( {
 	onEvent = chamarCadastrarProfessor
 	}  )
 
-local prpstAluno = widget.newButton( {
-	x = display.contentWidth /3.15,
-	y = display.contentHeight/2,
-	label = "Proposta Aluno",
-	id = "propostaaluno",
-	fontSize =18,
-	width = 160, height = 30,
-	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-	shape = "roundedrect",
-	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamarpropostaAluno
-	}  )
 
-local respProfessor = widget.newButton( {
-	x = display.contentWidth /3.15,
-	y = display.contentHeight/1.5,
-	label = "Resp. Professor",
-	id = "respostaProfessor",
-	fontSize =18,
-	width = 160, height = 30,
-	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
-	shape = "roundedrect",
-	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	onEvent = chamartelaRespProfessor
-	}  )
 
 -- destroy()
 function scene:destroy( event )

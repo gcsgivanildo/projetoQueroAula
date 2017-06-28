@@ -3,15 +3,15 @@ local composer = require("composer")
 local dadosProf = require("funcoes")
 local widget = require ("widget")
 
---seta todos objetos display para anchorX e anchorY na posição desejada
---display.setDefault("anchorX", 0)
---display.setDefault("anchorY", 0)
---display.setDefault("background", 0,0,0)
-
 local scene = composer.newScene()
---composer.removeScene( "home" )
+composer.removeScene( "home" )
 composer.removeScene("cadastro")
+composer.removeScene("pesquisarProfessor")
+--composer.getvariable(dadosProf.listarProfessor()[row].nome)
 
+--local teste = composer.getvariable( dadosProf.listarProfessor()[row].nome)
+
+print(teste)
 -- create()
 function scene:create( event )
      local sceneGroup = self.view
@@ -76,9 +76,9 @@ logo.y = display.contentCenterY / 10
 
 --------newText------------
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 )
-local localizacaoTxt = display.newText("Professor: Marta", display.contentCenterX/1.6, display.contentCenterY /2.9, native.systemFont, 18 )
+local localizacaoTxt = display.newText("Professor: x "--[[.. dadosProf.listarProfessor()[row].id--]], display.contentCenterX/1.6, display.contentCenterY /2.9, native.systemFont, 18 )
 localizacaoTxt:setFillColor( 0, 0, 255 )
-
+--print("id do fêssor"..dadosProf.listarProfessor()[row].nome)
 
 local meuGroup = display.newGroup()
 	meuGroup:insert( retLogo )
@@ -87,7 +87,6 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( logo )
 	meuGroup:insert( logotxt )
 	meuGroup:insert( localizacaoTxt )
-
 
 
 local lblVlr = display.newText("Valor", display.contentCenterX/4.5, display.contentCenterY /1.90, native.systemFont, 18 )
@@ -137,7 +136,7 @@ local inicio = widget.newButton( {
 	} )
 
 ------Professor escolhido
-local rtlProf = display.newText("Professor(a): Maria", 10, 70, native.systemFont, 9)
+--local rtlProf = display.newText("Professor(a): Maria", 10, 70, native.systemFont, 9)
 
 --local linha = display.newLine (2, display.contentCenterY/2, display.contentWidth, display.contentCenterY/2)
 
