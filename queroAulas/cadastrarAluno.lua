@@ -85,7 +85,7 @@ local nomeTxt = display.newText("Nome", display.contentCenterX/1.2, display.cont
 
 local usuarioTxt = display.newText("Usu√°rio", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
 usuarioTxt:setFillColor( 1, 1, 1 )
-local areadeinteresseTxt = display.newText("√-rea de Interesse", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
+local areaDeInteresseTxt = display.newText("√-rea de Interesse", display.contentCenterX/2.2, display.contentCenterY /0.67, native.systemFont, 18 )
 local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /0.85, native.systemFont, 18 )
 
 
@@ -93,7 +93,7 @@ local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.co
 -------newTextField-----------
 local nomeTf = native.newTextField( display.contentCenterX*1.3 , display.contentCenterY/1.5, display.contentWidth -100, display.contentHeight/15 )
 local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
-local areadeinteresseTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.64, display.contentWidth -50, display.contentHeight/15 )
+local areaDeInteresseTf = native.newTextField( display.contentCenterX / 1.1 , display.contentCenterY *1.64, display.contentWidth -50, display.contentHeight/15 )
 local senhaTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY *1.3, display.contentWidth -50, display.contentHeight/15 )
 
 local meuGroup = display.newGroup()
@@ -109,7 +109,7 @@ local meuGroup = display.newGroup()
 function ConcluirCadastroAluno( event )
 	if(event.phase == "ended") then
 
-		local insertAluno = [[INSERT INTO professor VALUES (NULL, ']]..nomeTf.text..[[',']]..usuarioTf.text..[[',']]..senhaTf.text..[[',']]..nivelEnsinoTf.text..[[',']]..formacaoTf.text..[['); ]]
+		local insertAluno = [[INSERT INTO aluno VALUES (NULL, ']]..nomeTf.text..[[',']]..usuarioTf.text..[[',']]..areaDeInteresseTf.text..[[',']]..senhaTf.text..[['); ]]
 		print( insertAluno )
 		db:exec(insertAluno)
 	end

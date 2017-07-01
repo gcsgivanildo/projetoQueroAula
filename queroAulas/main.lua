@@ -100,7 +100,7 @@ local function chamarHome( event )
 		composer.gotoScene( "home" )
 	end
 end
-
+ 
 local function chamarCadastro( event )
 if(event.phase == "ended") then
 local composer = require("composer")
@@ -117,7 +117,7 @@ local entrar = widget.newButton( {
 	overFile = "botoes/entrarover.png",
 	width = 100,
 	height = 40,
-	--onEvent = chamarlogin
+	onEvent = chamarlogin
 	}  )
 
 	local cadastrar = widget.newButton( {
@@ -149,6 +149,7 @@ function scene:destroy( event )
         local group = self.view
  		group:insert(entrar)
  		group:insert(meuGroup)
+ 		group:insert(cadastrar)
 
     end 
 

@@ -151,7 +151,7 @@ local login = widget.newButton( {
 	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
 	shape = "roundedrect",
 	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
-	--onEvent = chamarlogin
+	onEvent = chamarlogin
 	}  )
 
 local pesquisarProfessor = widget.newButton( {

@@ -165,7 +165,7 @@ function pesquisarProfessorNome( event )
 		})
 				
 		for row=1, #dadosProf.listarProfessor() do
-			listaProf = "Id: "..dadosProf.listarProfessor()[row].id.."\nProfessor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNive Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
+			listaProf = "Id: "..dadosProf.listarProfessor()[row].id.."\nProfessor: " ..dadosProf.listarProfessor()[row].nome.." \nUsuario: "..dadosProf.listarProfessor()[row].usuario.." \nExp Prof: "..dadosProf.listarProfessor()[row].expProfissional.." \nNivel Ensino: "..dadosProf.listarProfessor()[row].nivelEnsino.." \nFormacao: "..dadosProf.listarProfessor()[row].formacao
 			
 			idProf = dadosProf.listarProfessor()[row].id
 			--print ("gagagaga "..idProf)

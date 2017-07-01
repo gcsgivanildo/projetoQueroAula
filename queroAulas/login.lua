@@ -2,7 +2,7 @@
 local composer = require("composer")
 
 local scene = composer.newScene()
-
+composer.removeScene( "main")
 composer.removeScene( "cadastroProfessor" )
 composer.removeScene( "login")
 composer.removeScene( "home")
@@ -20,7 +20,7 @@ end
 
 
 -- show()
-function scene:show( event )
+function scene:show( event ) 
 
     local sceneGroup = self.view
     local phase = event.phase
@@ -51,7 +51,7 @@ function scene:hide( event )
 end
 
 
-<<<<<<< HEAD
+--<<<<<<< HEAD
 
 
 -------------banco de dados------------------
@@ -72,8 +72,8 @@ db:exec(insertLogin)
 
 
 -------require-----------------
-=======
->>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
+--=======
+-->>>>>>> c1b9e741073b94d4642374e4af6324501f9851bf
 local widget = require ("widget")
 
 
@@ -90,7 +90,18 @@ logo.y = display.contentCenterY / 10
 
 --------newText------------
 local logotxt = display.newText("Quero Aulas", display.contentCenterX/1.1, display.contentCenterY/9, native.systemFont, 18 )
-local bemVindotxt = display.newText("    Seja\nBem Vindo", display.contentCenterX * 1.6, display.contentCenterY/9, native.systemFont, 18 )
+--local bemVindotxt = display.newText("    Seja\nBem Vindo", display.contentCenterX * 1.6, display.contentCenterY/9, native.systemFont, 18 )
+
+
+local usuarioTxt = display.newText("Usuário", display.contentCenterX/4, display.contentCenterY /1.16, native.systemFont, 18 )
+usuarioTxt:setFillColor( 1, 1, 1 )
+local senhaTxt = display.newText("Senha", display.contentCenterX/4.4, display.contentCenterY /0.85, native.systemFont, 18 )
+
+
+
+-------newTextField-----------
+local usuarioTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY, display.contentWidth -50, display.contentHeight/15 )
+local senhaTf = native.newTextField( display.contentCenterX /1.1 , display.contentCenterY *1.3, display.contentWidth -50, display.contentHeight/15 )
 
 
 local meuGroup = display.newGroup()
@@ -99,7 +110,9 @@ local meuGroup = display.newGroup()
 	meuGroup:insert( linha )
 	meuGroup:insert( logo )
 	meuGroup:insert( logotxt )
-	meuGroup:insert( bemVindotxt)
+	meuGroup:insert( usuarioTf )
+	meuGroup:insert( senhaTf )
+	
 
 -----------funcao--------
 local function chamarHome( event )
@@ -109,7 +122,32 @@ local function chamarHome( event )
 	end
 end
 
+local function chamarMain( event )
+	if (event.phase == "ended") then
+		local composer = require("composer")
+		composer.gotoScene( "main" )
+	end
+end
+
+local function fazerLogin(  )
+	if((nome == #dadosProfessor.usuario and senha == #dadosProfessor.usuario) 
+		or nome == #dadosAluno.nome and senha == #dadosAlunos.senha)  then
+		
+	end
+end
+
 --------------botao----------------
+local inicio = widget.newButton( {
+	x = display.contentWidth  /1.25,
+	y = display.contentHeight/18,
+	label = "Início",
+	id = "inicio",
+	fontSize =18,
+	width = 100, height = 30,
+	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
+    onEvent = chamarMain
+	} )
+
 local home = widget.newButton( {
 	x = display.contentWidth /2,
 	y = display.contentHeight/5.7,
@@ -123,13 +161,28 @@ local home = widget.newButton( {
 	onEvent = chamarHome
 	}  )
 
+local logar = widget.newButton( {
+	x = display.contentWidth /5.2,
+	y = display.contentHeight *0.75,
+	label = "Logar",	
+	id = "logar",
+	fontSize =18,
+	width = 100, height = 30,
+	labelColor = {default={1,1,1}, over={0,0,0, 0.9}},
+	shape = "roundedrect", 
+	fillColor = {default = {0, 0, 255}, over = {255, 255, 255, .8}},
+	strokeColor = {default={0.9,0.9,0.9,1}, over={0.8,0.8,0.8, 1}},
+    strokeWidth = 1,
+    onEvent = ConcluirCadastroProfessor	
+	}  )
+
 
 -- destroy()
 function scene:destroy( event )
         local group = self.view
  		group:insert(home)
  		group:insert(meuGroup)
-
+ 		group:insert(logar)
     end
 
 -- -----------------------------------------------------------------------------------
